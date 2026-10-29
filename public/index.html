@@ -113,10 +113,12 @@
     -->
     <div class="projects">
       <article class="project reveal" data-cat="Salesforce">
-        <p class="project-state">En construcción</p>
-        <h3>Mini-CRM de candidaturas</h3>
-        <p>Un formulario web crea candidaturas en Salesforce sin duplicados y recibe los cambios de estado por eventos.</p>
-        <p class="stack">REST · Platform Events · Named Credentials</p>
+        <p class="project-state is-live">Publicado</p>
+        <h3>API de candidaturas en Salesforce</h3>
+        <p>Una API REST crea o actualiza candidaturas sin duplicados. Al pasar a Entrevista, un Queueable envía el lote a un sistema externo y reintenta si falla.</p>
+        <img class="project-shot" src="assets/mini-crm/webhook.png" alt="Petición POST recibida en webhook.site desde Salesforce con el lote de una candidatura en Entrevista" width="1597" height="793" loading="lazy" />
+        <p class="stack">Apex REST · Trigger · Queueable · Named Credentials · LWC</p>
+        <p class="links"><a href="https://github.com/Kairveth/sf-candidaturas-api">Código</a><a href="caso/">Caso técnico</a></p>
       </article>
       <article class="project reveal" data-cat="Web">
         <p class="project-state is-live">Publicado</p>

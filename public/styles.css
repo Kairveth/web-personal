@@ -135,6 +135,7 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 .links a { color: var(--ink) !important; font-weight: 500; text-underline-offset: 4px; }
 .links a:hover { color: var(--accent) !important; }
 @media (min-width: 1100px) { .projects { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); } }
+.project-shot { width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 8px; }
 ::view-transition-group(*) { animation-duration: .3s; }
 
 /* Servicios */
