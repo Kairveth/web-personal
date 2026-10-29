@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auditoría de integraciones: API de candidaturas · Pedro Romero Álvarez</title>
+  <meta name="description" content="Auditoría de integraciones de la API de candidaturas en Salesforce: reglas revisadas, hallazgos y estado de cada uno." />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    .caso { padding: 56px 0 72px; }
+    .caso-back { font: 500 .875rem var(--mono); color: var(--graphite); text-decoration: none; }
+    .caso-back:hover { color: var(--accent); }
+    .caso .eyebrow { font: 500 .75rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--graphite); margin: 32px 0 12px; }
+    .caso h1 { margin-bottom: 20px; }
+    .caso .lead { font-size: 1.1875rem; color: var(--graphite); max-width: 60ch; margin: 0 0 8px; }
+    .caso h2 { font-size: 1.375rem; margin: 56px 0 20px; }
+    .caso figure { margin: 32px 0 0; }
+    .caso figure img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper-tint); }
+    .caso figcaption { font-size: .9375rem; color: var(--graphite); margin-top: 10px; max-width: 65ch; }
+    .caso ol { list-style: none; margin: 0; padding: 0; counter-reset: paso; border-top: 1px solid var(--rule); }
+    .caso ol > li { counter-increment: paso; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 0 16px; padding: 28px 0; border-bottom: 1px solid var(--rule); }
+    .caso ol > li::before { content: counter(paso, decimal-leading-zero); font: 500 .875rem var(--mono); color: var(--accent); padding-top: 4px; }
+    .caso ol h3 { font-size: 1.125rem; margin-bottom: 8px; }
+    .caso ol p { margin: 0 0 14px; max-width: 65ch; }
+    .caso ol figure { margin: 16px 0 0; }
+    .caso ol figure img { border-radius: 6px; }
+    .caso ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
+    .caso ul li { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+    .caso ul strong { font-weight: 700; }
+    .caso ul span { color: var(--graphite); }
+    .caso .decisiones p { border-left: 2px solid var(--ok); padding-left: 16px; margin: 0 0 16px; max-width: 65ch; }
+    .caso code { font: .9em var(--mono); overflow-wrap: anywhere; }
+    .caso .repo { font: 500 .9375rem var(--mono); color: var(--accent); overflow-wrap: anywhere; }
+    .caso .estado { font: 500 .8125rem var(--mono); }
+    .caso table { width: 100%; border-collapse: collapse; font-size: .9375rem; margin: 16px 0 0; }
+    .caso th, .caso td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    .caso th { font: 500 .75rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--graphite); }
+    .caso .hallazgo { padding: 20px 0; border-bottom: 1px solid var(--rule); }
+    .caso .hallazgo h3 { font-size: 1.0625rem; margin: 0 0 8px; }
+    .caso .hallazgo p { margin: 0 0 8px; max-width: 65ch; }
+    .caso .hallazgo .meta { font: .8125rem var(--mono); color: var(--graphite); }
+    .caso .tabla-wrap { overflow-x: auto; }
+    .caso footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: .875rem; color: var(--graphite); }
+  </style>
+</head>
+<body>
+<main class="wrap caso">
+  <a class="caso-back" href="../../#portfolio">← Volver al portfolio</a>
+
+  <p class="eyebrow">Auditoría de integraciones · Salesforce</p>
+  <h1>API de candidaturas en Salesforce</h1>
+  <p class="lead">Revisé el repositorio con ocho reglas de integración y una lectura de riesgos por fallo. Aquí están los hallazgos y el estado de cada uno. Se actualiza al cerrarlos.</p>
+
+  <h2>Qué revisé</h2>
+  <p>El código del repositorio: siete clases de producción, cinco de test, un trigger, un componente LWC y la colección de Postman. No revisé la org en vivo, así que el estado real de los jobs y la cobertura quedan como pendientes.</p>
+
+  <h2>Reglas</h2>
+  <div class="tabla-wrap">
+  <table>
+    <thead><tr><th>Regla</th><th>Resultado</th><th>Dónde</th></tr></thead>
+    <tbody>
+      <tr><td>Callout sin timeout explícito</td><td>No cumple</td><td>Queueable de notificación</td></tr>
+      <tr><td>Endpoint hardcodeado</td><td>Cumple</td><td>Named Credential</td></tr>
+      <tr><td>Credenciales en código</td><td>Cumple</td><td>Búsqueda en archivos versionados</td></tr>
+      <tr><td>Callout desde trigger</td><td>Cumple</td><td>Trigger delega en handler</td></tr>
+      <tr><td>Fallos sin reintento o registro</td><td>Parcial</td><td>Finalizer: un reintento, luego solo log</td></tr>
+      <tr><td>SOQL o DML en bucle</td><td>Cumple</td><td>Lecturas fuera de bucle</td></tr>
+      <tr><td>Clases sin sharing declarado</td><td>Cumple</td><td>Todas declaran sharing</td></tr>
+      <tr><td>Tests sin aserciones</td><td>Parcial</td><td>Test de notificación comprueba solo el número de llamadas</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Hallazgos</h2>
+
+  <article class="hallazgo">
+    <h3>1. Fallo final sin registro persistente</h3>
+    <p>Si el destino cae dos veces, el lote se pierde y el único rastro está en el debug log, que caduca. No hay forma de saber qué candidaturas no llegaron.</p>
+    <p class="meta">Severidad alta · Estado: abierto</p>
+  </article>
+
+  <article class="hallazgo">
+    <h3>2. Callout sin timeout explícito</h3>
+    <p>La llamada usa el valor por defecto. Un destino lento puede ocupar el job más tiempo del necesario.</p>
+    <p class="meta">Severidad alta · Estado: abierto</p>
+  </article>
+
+  <article class="hallazgo">
+    <h3>3. Reintento inmediato</h3>
+    <p>El segundo intento se encola al instante. Si el destino sigue caído, falla igual. Hace falta una espera antes del reintento.</p>
+    <p class="meta">Severidad media · Estado: abierto</p>
+  </article>
+
+  <article class="hallazgo">
+    <h3>4. La API no comprueba permisos de objeto ni de campo</h3>
+    <p>El endpoint escribe con el usuario de integración sin comprobar create ni update. El controlador del LWC sí lo hace. Hay que alinear los dos.</p>
+    <p class="meta">Severidad media · Estado: abierto</p>
+  </article>
+
+  <article class="hallazgo">
+    <h3>5. El test del LWC está sin escribir</h3>
+    <p>El archivo de test tiene la plantilla generada por la CLI y no prueba nada. Hasta escribir los casos, no cuenta como prueba.</p>
+    <p class="meta">Severidad media · Estado: abierto</p>
+  </article>
+
+  <article class="hallazgo">
+    <h3>6. Anonimización del batch de retención</h3>
+    <p>El batch cambia el nombre, pero deja el identificador externo. Si ese identificador identifica a una persona, la anonimización está incompleta. Pendiente de confirmar qué contiene.</p>
+    <p class="meta">Severidad media, pendiente de confirmar · Estado: abierto</p>
+  </article>
+
+  <article class="hallazgo">
+    <h3>7. Sin clave de idempotencia en el callout</h3>
+    <p>El lote no lleva identificador de envío. Si el destino procesa el lote y la respuesta se pierde, el reintento puede crear duplicados allí.</p>
+    <p class="meta">Severidad media · Estado: abierto · Pendiente de confirmar en el destino</p>
+  </article>
+
+  <h2>Qué sigue</h2>
+  <p>Primero, los hallazgos 1 y 2. Después el 5, que es el que más pesa en credibilidad. El resto en el orden que marque el tiempo disponible. Cada cierre se marca aquí con la fecha y el commit.</p>
+
+  <footer>
+    Auditoría del 29/10/2026 sobre el repositorio de candidaturas. Los datos son de prueba.
+  </footer>
+</main>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>API de candidaturas en Salesforce · Pedro Romero Álvarez</title>
+  <title>API de candidaturas en Salesforce · Caso técnico · Pedro Romero Álvarez</title>
   <meta name="description" content="Caso técnico: API REST de candidaturas en Salesforce con validación de estados y envío de lotes a un sistema externo." />
   <link rel="stylesheet" href="../styles.css" />
   <style>
@@ -34,21 +34,31 @@
     .caso footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: .875rem; color: var(--graphite); }
   </style>
 </head>
-<body>
-
 <main class="wrap caso">
-  <a class="caso-back" href="../#portfolio">← Volver al portfolio</a>
+  <a class="caso-back" href="../#portfolio">← Volver a proyectos</a>
 
-  <p class="eyebrow">Caso técnico · Salesforce</p>
+  <p class="eyebrow">Proyecto personal · Salesforce</p>
   <h1>API de candidaturas en Salesforce</h1>
-  <p class="lead">Recibe candidaturas por REST, valida sus cambios de estado y avisa a un sistema externo cuando una candidatura pasa a entrevista. Aquí está el recorrido completo, con capturas de cada paso.</p>
+  <p class="lead">Recibe candidaturas por REST, valida sus cambios de estado y avisa a un sistema externo cuando una candidatura pasa a entrevista.</p>
 
+  <h2>Problema</h2>
+  <p>Las candidaturas llegan desde fuera por API. Cuando una pasa a Entrevista, otro sistema tiene que enterarse. Hay que evitar duplicados y cambios de estado que no tengan sentido.</p>
+
+  <h2>Arquitectura</h2>
   <figure>
-    <img src="../assets/mini-crm/webhook.png" alt="Petición POST recibida en webhook.site desde Salesforce con el lote de la candidatura PM-005" />
-    <figcaption>Llamada real de Salesforce al destino externo cuando la candidatura PM-005 pasa a Entrevista.</figcaption>
+    <img src="../assets/diagrama-candidaturas.svg" alt="Diagrama del flujo: entrada REST, upsert por IdExterno, trigger de transiciones, Queueable de notificación con reintento, sistema externo, LWC de estado y batch de retención" />
+    <figcaption>Flujo según el código del repositorio, versión auditada el 29/10/2026. Cada caja es una clase u objeto del repo. Si el código cambia, el diagrama se regenera.</figcaption>
   </figure>
 
-  <h2>Recorrido</h2>
+  <h2>Decisiones y alternativas descartadas</h2>
+  <div class="decisiones">
+    <p><strong>API REST propia, no la API estándar.</strong> Descartada: API estándar. Motivo: hace falta idempotencia por idExterno y códigos 400 y 409 concretos. Con la API estándar, esa lógica quedaría en el sistema que llama.</p>
+    <p><strong>Reglas de transición en el trigger, no en el endpoint.</strong> Descartada: validar en el endpoint. Motivo: la regla también se aplica a la edición desde la ficha y a cualquier otro origen.</p>
+    <p><strong>Validar en before update, notificar en after update.</strong> Descartada: notificar en before. Motivo: after tiene el registro ya guardado. El callout no puede ir desde el trigger, así que va en un Queueable.</p>
+    <p><strong>Un callout por lote.</strong> Descartada: un callout por registro. Motivo: con 200 registros, una sola petición. Coste: si falla, el lote entero se reintenta junto.</p>
+    <p><strong>Finalizer para el reintento, no Schedulable.</strong> Descartada: Schedulable. Motivo: el reintento depende del resultado del job, no de un calendario. Coste: el reintento es inmediato (ver límites).</p>
+  </div>
+
   <ol>
     <li>
       <div>
@@ -102,22 +112,21 @@
     </li>
   </ol>
 
-  <h2>Qué contiene el repositorio</h2>
+  <h2>Límites conocidos</h2>
   <ul>
-    <li><strong>API REST</strong> <span>con upsert por identificador externo y códigos 201, 200, 400, 409 y 500.</span></li>
-    <li><strong>Trigger y handler</strong> <span>validan transiciones en before update y encolan en after update.</span></li>
-    <li><strong>Queueable con reintento</strong> <span>un callout por lote y un Finalizer que reencola una vez si falla.</span></li>
-    <li><strong>Batch RGPD</strong> <span>anonimiza las candidaturas cuya fecha de descarte ya venció.</span></li>
-    <li><strong>Componente de estado</strong> <span>LWC en la ficha con los botones de transición permitidos.</span></li>
-    <li><strong>Colección de Postman</strong> <span>nueve peticiones con tests del CRUD y de los errores.</span></li>
+    <li><strong>Reintento inmediato.</strong> <span>Si el destino sigue caído, el segundo intento falla igual.</span></li>
+    <li><strong>Fallo final sin registro.</strong> <span>Solo queda en el debug log, que caduca. No hay forma de saber qué candidaturas no llegaron.</span></li>
+    <li><strong>Sin clave de idempotencia en el callout.</strong> <span>Si el destino procesa el lote y la respuesta se pierde, puede duplicar allí.</span></li>
+    <li><strong>Timeout por defecto.</strong> <span>El callout no define timeout explícito.</span></li>
+    <li><strong>Anonimización parcial.</strong> <span>El batch cambia el nombre y deja IdExterno__c. Pendiente de confirmar si identifica a una persona.</span></li>
   </ul>
+  <p>Cada límite está en la <a href="auditoria-candidaturas/">auditoría del repositorio</a> con su estado.</p>
 
-  <h2>Decisiones</h2>
-  <div class="decisiones">
-    <p>Un callout por lote. Con 200 candidaturas en una transacción, el destino recibe una sola petición.</p>
-    <p>Las reglas de transición están en el trigger, así se aplican también desde la ficha.</p>
-    <p>Las credenciales están en Named Credential y External Credential de la org, fuera del repositorio.</p>
-  </div>
+  <h2>Documentación</h2>
+  <ul>
+    <li><strong>README</strong> <span>decisiones, pasos de despliegue y límites de escalado. <a href="https://github.com/Kairveth/sf-candidaturas-api/blob/main/README.md">Leer en GitHub</a></span></li>
+    <li><strong>Colección Postman</strong> <span>nueve peticiones con tests. <a href="https://github.com/Kairveth/sf-candidaturas-api/blob/main/postman/candidaturas.postman_collection.json">Ver archivo</a></span></li>
+  </ul>
 
   <h2>Código</h2>
   <p><a class="repo" href="https://github.com/Kairveth/sf-candidaturas-api">github.com/Kairveth/sf-candidaturas-api</a></p>
