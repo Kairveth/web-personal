@@ -197,3 +197,5 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 /* Registro personal: Sobre mí y Hyrox usan el tono cálido */
 #sobre-mi .block-title, #hyrox .block-title, .interests span { color: var(--warm); }
 .race { border-top: 2px solid var(--warm); }
+
+.tag-soon { font: 500 .6875rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--warm); border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; vertical-align: middle; margin-left: 6px; }
