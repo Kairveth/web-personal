@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pedro Romero Álvarez · Desarrollador Salesforce</title>
+  <meta name="description" content="Pedro Romero Álvarez, desarrollador Salesforce especializado en integraciones y APIs REST." />
+  <link rel="preload" href="assets/fonts/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="#inicio">Pedro Romero</a>
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">Menú</button>
+    <nav id="nav" class="nav">
+      <a href="#casos">Casos</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#hyrox">Hyrox</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section id="inicio" class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>Cuando el otro sistema falla, la integración sigue.</h1>
+      <p class="lead">Soy Pedro Romero Álvarez, desarrollador Salesforce. Conecto Salesforce con pasarelas de pago, ERP y portales, y lo diseño contando con reenvíos y caídas.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#contacto">Escribirme</a>
+        <a class="btn btn-quiet" href="#casos">Ver casos</a>
+      </div>
+    </div>
+    <figure class="log" aria-label="Registro de ejemplo de una integración">
+      <figcaption class="log-head"><span>integracion.log</span><span>ejemplo</span></figcaption>
+      <ol class="log-lines">
+        <li style="--i:0"><time>14:02:11</time><code>POST /apexrest/pagos</code><b class="s2">201</b><span>pago creado</span></li>
+        <li style="--i:1"><time>14:02:15</time><code>POST /apexrest/pagos</code><b class="s2">200</b><span>reenvío: ya existía, sin duplicado</span></li>
+        <li style="--i:2"><time>14:03:40</time><code>GET erp/clientes/4471</code><b class="s5">503</b><span>ERP caído</span></li>
+        <li style="--i:3"><time>14:03:40</time><code>queueable</code><b class="s3">↻ 1/3</b><span>reintento programado</span></li>
+        <li style="--i:4"><time>14:04:10</time><code>GET erp/clientes/4471</code><b class="s2">200</b><span>cliente sincronizado</span></li>
+      </ol>
+    </figure>
+  </div>
+  <p class="wrap meta">Altafulla, Tarragona · 5 años con Salesforce · 9 certificaciones · Disponible para empleo y proyectos</p>
+</section>
+
+<section id="casos" class="block">
+  <div class="wrap">
+    <h2 class="block-title">Casos</h2>
+    <article class="case reveal">
+      <p class="case-tag">Pagos · Apex REST · OAuth 2.0</p>
+      <div>
+        <h3>Webhook de pagos que no duplica</h3>
+        <dl class="case-steps">
+          <div><dt>Problema</dt><dd>La pasarela reenviaba avisos y cada reenvío creaba otro pago.</dd></div>
+          <div><dt>Decisión</dt><dd>Upsert por External ID con el identificador de la pasarela.</dd></div>
+          <div><dt>Resultado</dt><dd>Cada pago se registra una vez, llegue el aviso las veces que llegue.</dd></div>
+        </dl>
+      </div>
+    </article>
+    <article class="case reveal">
+      <p class="case-tag">Cobros · Custom Metadata · Batch</p>
+      <div>
+        <h3>Reglas de cobro sin despliegues</h3>
+        <dl class="case-steps">
+          <div><dt>Problema</dt><dd>Cada cambio de regla exigía tocar código y desplegar.</dd></div>
+          <div><dt>Decisión</dt><dd>Mover las reglas a Custom Metadata, con 12 plantillas.</dd></div>
+          <div><dt>Resultado</dt><dd>Negocio cambia las reglas sin pasar por desarrollo.</dd></div>
+        </dl>
+      </div>
+    </article>
+    <article class="case reveal">
+      <p class="case-tag">RGPD · Apex · Sharing</p>
+      <div>
+        <h3>Borrado RGPD en cascada</h3>
+        <dl class="case-steps">
+          <div><dt>Problema</dt><dd>El motor de borrado estaba en producción con 8 defectos.</dd></div>
+          <div><dt>Decisión</dt><dd>Reglas explícitas por cada dependencia entre objetos.</dd></div>
+          <div><dt>Resultado</dt><dd>El borrado recorre las relaciones de forma controlada.</dd></div>
+        </dl>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="portfolio" class="block block-tint">
+  <div class="wrap">
+    <div class="block-head">
+      <h2 class="block-title">Portfolio</h2>
+      <div class="filters" role="group" aria-label="Filtrar proyectos" hidden></div>
+    </div>
+    <!--
+      Para añadir un proyecto, copia este bloque dentro de .projects:
+      data-cat: tecnologías separadas por coma. Los filtros se crean solos. Ejemplo: "Salesforce, Web".
+      Estado: "En construcción" o "Publicado" (para Publicado añade la clase is-live).
+      Enlaces: borra los que no existan.
+
+      <article class="project reveal" data-cat="Salesforce">
+        <p class="project-state">En construcción</p>
+        <h3>Nombre del proyecto</h3>
+        <p>Qué problema resuelve, en una o dos frases.</p>
+        <p class="stack">Tecnología · Tecnología</p>
+        <p class="links"><a href="https://github.com/...">Código</a><a href="https://...">Demo</a></p>
+      </article>
+    -->
+    <div class="projects">
+      <article class="project reveal" data-cat="Salesforce">
+        <p class="project-state">En construcción</p>
+        <h3>Mini-CRM de candidaturas</h3>
+        <p>Un formulario web crea candidaturas en Salesforce sin duplicados y recibe los cambios de estado por eventos.</p>
+        <p class="stack">REST · Platform Events · Named Credentials</p>
+      </article>
+      <article class="project reveal" data-cat="Web">
+        <p class="project-state is-live">Publicado</p>
+        <h3>Esta web</h3>
+        <p>HTML, CSS y unas pocas líneas de JavaScript. Sin frameworks ni dependencias.</p>
+        <p class="stack">HTML · CSS · JavaScript</p>
+        <p class="links"><a href="https://github.com/Kairveth/web-personal">Código</a></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="servicios" class="block">
+  <div class="wrap">
+    <h2 class="block-title">Servicios</h2>
+    <div class="services">
+      <article class="reveal">
+        <h3>Integraciones REST</h3>
+        <p>Salesforce con ERP, pasarelas de pago y portales. OAuth 2.0, Named Credentials y reintentos que no duplican datos.</p>
+      </article>
+      <article class="reveal">
+        <h3>Revisión técnica</h3>
+        <p>Reviso diseño, código y despliegues antes de producción, y te digo qué cambiaría y por qué.</p>
+      </article>
+      <article class="reveal">
+        <h3>Desarrollo Salesforce</h3>
+        <p>Apex, Flow y LWC con pruebas. Primero miro si basta con configuración.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="sobre-mi" class="block block-tint">
+  <div class="wrap about">
+    <img class="about-photo reveal" src="assets/foto.jpg" alt="Pedro Romero Álvarez" width="360" height="450" loading="lazy" />
+    <div class="about-text reveal">
+      <h2 class="block-title">Sobre mí</h2>
+      <p class="about-lead">En equipo prefiero la claridad: decir lo que pienso, lo que necesito y cuándo lo necesito.</p>
+      <p>Trabajo mejor con requisitos y criterios de aceptación bien definidos. Me gusta tener autonomía para resolver y estoy disponible cuando alguien me necesita. Lo que me mueve son las integraciones y las APIs REST, y quiero crecer hacia arquitecto de Salesforce.</p>
+      <p class="interests"><span>Fuera del trabajo:</span> Hyrox, running, pádel, cine de acción, anime, música y paseos con Odin.</p>
+    </div>
+  </div>
+</section>
+
+<section id="hyrox" class="block">
+  <div class="wrap hyrox reveal">
+    <div>
+      <h2 class="block-title">Hyrox</h2>
+      <p>Preparo mi primer Hyrox con fuerza, running y pádel. Compito sobre todo conmigo mismo. Aquí iré publicando carreras y tiempos.</p>
+    </div>
+    <dl class="race">
+      <div><dt>Próxima carrera</dt><dd>Por confirmar</dd></div>
+      <div><dt>Mejor tiempo</dt><dd>Sin carreras todavía</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="certificaciones" class="block block-tint">
+  <div class="wrap">
+    <h2 class="block-title">Certificaciones Salesforce</h2>
+    <ul class="certs reveal">
+      <li class="cert-main">Platform Integration Architect</li>
+      <li>Platform Developer II</li>
+      <li>Platform Developer I</li>
+      <li>Platform App Builder</li>
+      <li>Platform Administrator</li>
+      <li>JavaScript Developer I</li>
+      <li>Agentforce Specialist</li>
+      <li>AI Associate</li>
+      <li>Certified Associate</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contacto" class="block contact">
+  <div class="wrap">
+    <h2 class="block-title">Contacto</h2>
+    <a class="contact-mail" href="mailto:pedroralvarez@outlook.es">pedroralvarez@outlook.es</a>
+    <div class="actions">
+      <button class="btn btn-quiet" type="button" id="copiar">Copiar correo</button>
+      <a class="btn btn-quiet" href="https://www.linkedin.com/in/pedro-romero-alvarez-329b035a/" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="contact-note">Para reservar una llamada, escríbeme y te propongo hueco. El calendario en línea llegará pronto.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <span>© 2026 Pedro Romero Álvarez</span>
+    <span>HTML y CSS escritos a mano</span>
+  </div>
+</footer>
+
+</body>
+</html>

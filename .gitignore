@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+.env
+.env.*
+
+# Claude Code: configuración personal de esta máquina
+CLAUDE.local.md
+.claude/settings.local.json
