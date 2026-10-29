@@ -6,39 +6,24 @@
 @font-face { font-family: 'IBM Plex Mono'; font-weight: 500; font-display: swap; src: url(assets/fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2'); }
 
 :root {
-  --paper: #f5f7fa;
-  --paper-tint: #ebeff5;
-  --ink: #0e1726;
-  --graphite: #556070;
-  --rule: #d3dae4;
-  --accent: #1d4ed8;
-  --on-accent: #ffffff;
-  --warm: #b53a09;
-  --ok: #0f7b5f;
-  --retry: #b26a00;
-  --fault: #c0392b;
-  --log-bg: #14181f;
+  color-scheme: dark;
+  --paper: #0b1220;
+  --paper-tint: #111a2c;
+  --ink: #e6ebf2;
+  --graphite: #9aa6b8;
+  --rule: #24304a;
+  --accent: #7aa2ff;
+  --on-accent: #0b1220;
+  --warm: #ff8a5b;
+  --ok: #3fbf8f;
+  --retry: #e0a03a;
+  --fault: #ef6b5b;
+  --log-bg: #0b0e12;
   --log-ink: #d9dee5;
   --log-dim: #7d8794;
   --display: 'Schibsted Grotesk', system-ui, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, monospace;
   --max: 1120px;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #0b1220;
-    --paper-tint: #111a2c;
-    --ink: #e6ebf2;
-    --graphite: #9aa6b8;
-    --rule: #24304a;
-    --accent: #7aa2ff;
-    --on-accent: #0b1220;
-    --warm: #ff8a5b;
-    --ok: #3fbf8f;
-    --retry: #e0a03a;
-    --fault: #ef6b5b;
-    --log-bg: #0b0e12;
-  }
 }
 
 * { box-sizing: border-box; }
