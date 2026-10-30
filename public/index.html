@@ -17,9 +17,9 @@
     <a class="brand" href="#inicio">Pedro Romero</a>
     <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">Menú</button>
     <nav id="nav" class="nav">
+      <a href="#servicios">Servicios</a>
       <a href="#casos">Trabajo</a>
       <a href="#portfolio">Proyectos</a>
-      <a href="#servicios">Servicios</a>
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#contacto">Contacto</a>
     </nav>
@@ -51,6 +51,41 @@
     </figure>
   </div>
   <p class="wrap meta">Altafulla, Tarragona · 5 años con Salesforce · 9 certificaciones · Disponible para empleo y proyectos</p>
+</section>
+
+<section id="servicios" class="block">
+  <div class="wrap">
+    <h2 class="block-title">Servicios</h2>
+    <div class="svc-list">
+      <details class="svc reveal" open>
+        <summary><span>Integraciones Salesforce</span><span class="svc-sub">pagos, ERP y portales</span></summary>
+        <div class="svc-body">
+          <p><strong>Qué es.</strong> APIs REST propias y llamadas salientes con Named Credentials, reintentos controlados y registro de fallos.</p>
+          <p><strong>Para quién.</strong> Equipos que necesitan que dos sistemas se entiendan sin duplicar ni perder datos.</p>
+          <p><strong>Qué recibes.</strong> Diseño de la integración, código con pruebas, documentación y puesta en producción coordinada con el cliente.</p>
+          <p><strong>Qué no hago.</strong> No sustituyo una plataforma de integración empresarial cuando el volumen la exige. Te lo digo antes de empezar.</p>
+        </div>
+      </details>
+      <details class="svc reveal">
+        <summary><span>Desarrollo Apex y LWC a medida</span><span class="svc-sub">lo que Flow no cubre</span></summary>
+        <div class="svc-body">
+          <p><strong>Qué es.</strong> Lógica en Apex, componentes Lightning Web Components y automatizaciones que la configuración estándar no resuelve.</p>
+          <p><strong>Para quién.</strong> Equipos con un requisito que Flow no cubre y que necesita código mantenible.</p>
+          <p><strong>Qué recibes.</strong> Código con pruebas, despliegue validado antes de tocar producción y notas de las decisiones tomadas.</p>
+          <p><strong>Qué no hago.</strong> No diseño la identidad visual de la marca. Trabajo con los componentes y patrones que ya use el cliente.</p>
+        </div>
+      </details>
+      <details class="svc reveal">
+        <summary><span>Diagnóstico de integraciones</span><span class="svc-sub tag-soon">en desarrollo</span></summary>
+        <div class="svc-body">
+          <p><strong>Qué es.</strong> Revisión de una org con integraciones: qué reviso, en qué orden y qué entrego. Ya tengo una auditoría de un proyecto propio, pendiente de publicar. El método completo sigue en redacción.</p>
+          <p><strong>Para quién.</strong> Equipos con integraciones en producción que no saben qué riesgos tienen.</p>
+          <p><strong>Qué recibes.</strong> Informe con hallazgos, severidad, evidencia y plan priorizado. Solo lectura: no despliego nada.</p>
+          <p><strong>Qué no hago.</strong> No accedo a una org sin permiso por escrito ni publico datos de clientes.</p>
+        </div>
+      </details>
+    </div>
+  </div>
 </section>
 
 <section id="casos" class="block">
@@ -132,26 +167,6 @@
   </div>
 </section>
 
-<section id="servicios" class="block">
-  <div class="wrap">
-    <h2 class="block-title">Servicios</h2>
-    <div class="services">
-      <article class="reveal">
-        <h3>Integraciones REST</h3>
-        <p>Conecto Salesforce con pagos, ERP y portales, sin duplicados y con reintentos controlados.</p>
-      </article>
-      <article class="reveal">
-        <h3>Desarrollo a medida</h3>
-        <p>Componentes Lightning Web Components, Apex y Flow con pruebas, para lo que la configuración estándar no cubre.</p>
-      </article>
-      <article class="reveal">
-        <h3>Auditorías de org <span class="tag-soon">en crecimiento</span></h3>
-        <p>Estoy desarrollando esta línea. Ya corregí defectos en un motor de borrado RGPD en producción. Ahora quiero revisar orgs en marcha: permisos, automatizaciones, límites y código.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
 <section id="sobre-mi" class="block block-tint">
   <div class="wrap about">
     <img class="about-photo reveal" src="assets/foto.jpg" alt="Pedro Romero Álvarez" width="360" height="450" loading="lazy" />
@@ -161,6 +176,15 @@
       <p>Soy desarrollador Salesforce y trabajo cada vez más como freelance. Conecto Salesforce con pagos, ERP y portales. He construido un webhook que no duplica cobros. Las reglas de cobro cambian sin desplegar, y el borrado RGPD tiene reglas explícitas para cada dependencia entre objetos.</p>
       <p>Antes de tocar código, entiendo qué duele en el negocio: qué pasa cuando algo falla y qué tiene que cumplir para darse por terminado. Como freelance puedo dedicarle el tiempo que hace falta a ese problema. Después escribo lo mínimo que lo resuelve bien.</p>
       <p>Me gustan los retos con fecha y con marcador. Estoy preparando mi primer Hyrox y quiero medir cuánto mejoro, sin quedarme con la sensación. Corro, juego al pádel, veo cine de acción y anime, y escucho música mientras programo. Y paseo con Odin, mi perro.</p>
+      <div class="experiencia reveal">
+        <h3>Experiencia por sector</h3>
+        <ul>
+          <li><strong>Seguros, educación y tercer sector</strong> <span>2025–2026 · Sales Cloud y Service Cloud, integraciones REST, pagos y RGPD.</span></li>
+          <li><strong>Proyectos para consultoras</strong> <span>2022–2025 · Integraciones REST, LWC, Apex y Flow en equipos Scrum.</span></li>
+          <li><strong>Servicios legales y moda</strong> <span>2021–2022 · Automatización con Batch Apex, Apex, LWC y SOQL.</span></li>
+          <li><strong>Banca y contact center</strong> <span>2019–2020 · Apex, SOQL, triggers, Aura y cargas de datos.</span></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>

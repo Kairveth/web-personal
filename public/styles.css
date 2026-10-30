@@ -185,3 +185,20 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 .race { border-top: 2px solid var(--warm); }
 
 .tag-soon { font: 500 .6875rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--warm); border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; vertical-align: middle; margin-left: 6px; }
+
+/* Servicios desplegables */
+.svc-list { display: grid; gap: 12px; }
+.svc { border: 1px solid var(--rule); border-radius: 12px; background: var(--paper); }
+.svc summary { list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 16px; padding: 20px 24px; font-weight: 700; font-size: 1.125rem; }
+.svc summary::-webkit-details-marker { display: none; }
+.svc summary::after { content: '+'; font: 500 1.25rem var(--mono); color: var(--accent); margin-left: auto; }
+.svc[open] summary::after { content: '–'; }
+.svc-sub { font: 400 .8125rem var(--mono); color: var(--graphite); }
+.svc-body { padding: 0 24px 20px; display: grid; gap: 12px; }
+.svc-body p { margin: 0; max-width: 65ch; color: var(--graphite); }
+.svc-body strong { color: var(--ink); }
+.experiencia { margin-top: 32px; }
+.experiencia h3 { font: 500 .8125rem var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--graphite); margin-bottom: 16px; }
+.experiencia ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.experiencia li { padding: 14px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
+.experiencia li span { color: var(--graphite); font-size: .9375rem; }
