@@ -6,22 +6,28 @@
 @font-face { font-family: 'IBM Plex Mono'; font-weight: 500; font-display: swap; src: url(assets/fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2'); }
 @font-face { font-family: 'Newsreader'; font-style: italic; font-weight: 400; font-display: swap; src: url(assets/fonts/newsreader-latin-400-italic.woff2) format('woff2'); }
 
-/* Dos registros: el azul es el sistema (trabajo), el cálido es la persona (voz propia).
-   La mono solo aparece donde hay código o registros. Lo que se mueve explica algo: un registro, un antes y después, un cambio de página. */
+/* Casi todo es tinta sobre papel. El color solo aparece como estado: verde resuelto, ámbar en curso, rojo fallo.
+   Los registros son paneles oscuros porque son instrumentos, no decoración. La serif cursiva es la voz de Pedro.
+   La mono solo aparece donde hay código o registros. Lo que se mueve explica algo. */
 :root {
-  color-scheme: dark;
-  --paper: #0b1220;
-  --paper-tint: #111a2c;
-  --ink: #e6ebf2;
-  --graphite: #9aa6b8;
-  --rule: #24304a;
-  --accent: #7aa2ff;
-  --on-accent: #0b1220;
+  color-scheme: light;
+  --paper: #f4f5f7;
+  --paper-tint: #e9ecf1;
+  --surface: #fcfcfd;
+  --ink: #101828;
+  --ink-soft: #2a3550;
+  --graphite: #566174;
+  --rule: #d3d8e0;
+  --accent: #101828;
+  --on-accent: #f4f5f7;
+  --ok-ink: #0b7a53;
+  --retry-ink: #946200;
+  --fault-ink: #c0392b;
   --warm: #ff8a5b;
   --ok: #3fbf8f;
   --retry: #e0a03a;
   --fault: #ef6b5b;
-  --log-bg: #0b0e12;
+  --log-bg: #0d1117;
   --log-ink: #d9dee5;
   --log-dim: #7d8794;
   --log-rule: #262c35;
@@ -31,6 +37,8 @@
   --ease: cubic-bezier(.2, .7, .2, 1);
   --max: 1120px;
 }
+/* Bloque invertido: mismas variables, valores cruzados */
+.invert { --paper: #101828; --surface: #101828; --ink: #f4f5f7; --ink-soft: #d3d8e0; --graphite: #a9b2c0; --rule: #2a3550; --accent: #f4f5f7; --on-accent: #101828; background: var(--paper); color: var(--ink); }
 
 @view-transition { navigation: auto; }
 
@@ -72,22 +80,24 @@ main:focus { outline: none; }
 .hero-grid { display: grid; gap: 48px; align-items: center; }
 @media (min-width: 960px) { .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 64px; } }
 h1 { font-size: clamp(2.5rem, 5.6vw, 4.5rem); line-height: 1.02; letter-spacing: -0.035em; font-weight: 800; }
-h1 .voz { display: inline-block; color: var(--warm); font-size: 1.06em; }
+/* El subrayado ondulado es el de un error. Nace rojo y pasa a verde cuando el registro de al lado se recupera. */
+h1 .voz { display: inline-block; font-size: 1.06em; text-decoration: underline wavy var(--ok-ink); text-decoration-thickness: .055em; text-underline-offset: .14em; text-decoration-skip-ink: none; animation: mend .6s ease 3.5s both; }
+@keyframes mend { from { text-decoration-color: var(--fault-ink); } }
 .lead { margin-top: 24px; max-width: 46ch; font-size: 1.1875rem; color: var(--graphite); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .btn { display: inline-flex; align-items: center; padding: 12px 20px; border-radius: 8px; font: 500 1rem var(--display); text-decoration: none; cursor: pointer; border: 1px solid var(--rule); background: none; color: var(--ink); transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .15s ease; }
 .btn:active { transform: scale(.97); }
 .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
-.btn-primary:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
 .btn-quiet:hover { border-color: var(--ink); }
 .hero-links { margin-top: 16px; color: var(--graphite); font-size: .9375rem; }
 .hero-links a { color: var(--ink); text-underline-offset: 4px; }
-.hero-links a:hover { color: var(--accent); }
+.hero-links a:hover { text-decoration-thickness: 2px; }
 .disponibilidad { margin-top: 24px; font-size: .9375rem; color: var(--ink); }
 .hero-meta { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: .875rem; color: var(--graphite); }
 
 /* Registro (elemento firma) */
-.log { margin: 0; background: var(--log-bg); color: var(--log-ink); border: 1px solid var(--log-rule); border-radius: 12px; font: 400 .8125rem/1.5 var(--mono); overflow: hidden; }
+.log { margin: 0; background: var(--log-bg); color: var(--log-ink); border: 1px solid var(--log-bg); border-radius: 12px; font: 400 .8125rem/1.5 var(--mono); overflow: hidden; }
 .log-head { display: flex; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--log-rule); color: var(--log-dim); }
 .log-lines { list-style: none; margin: 0; padding: 16px; display: grid; gap: 8px; }
 .log-lines::after { content: ''; width: .6em; height: 1.1em; margin-left: 8px; background: var(--log-dim); animation: blink 1s steps(1) infinite; }
@@ -148,8 +158,8 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 
 /* Servicios desplegables */
 .svc-list { display: grid; gap: 12px; }
-.svc { border: 1px solid var(--rule); border-radius: 12px; background: var(--paper); transition: border-color .25s ease; }
-.svc[open] { border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); }
+.svc { border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); transition: border-color .25s ease; }
+.svc[open] { border-color: var(--ink); }
 .svc summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: baseline; padding: 20px 24px; font-weight: 700; font-size: 1.125rem; border-radius: 12px; }
 .svc summary span { grid-column: 1; justify-self: start; }
 .svc summary::-webkit-details-marker { display: none; }
@@ -161,8 +171,8 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 @keyframes unfold { from { opacity: 0; transform: translateY(-6px); } }
 .svc-body p { max-width: 65ch; color: var(--graphite); }
 .svc-body strong { color: var(--ink); }
-.svc-body p:last-child { padding-left: 12px; border-left: 2px solid var(--warm); }
-.svc summary .tag-soon { font-size: .8125rem; font-weight: 500; color: var(--warm); border: 1px solid currentColor; border-radius: 999px; padding: 1px 10px; }
+.svc-body p:last-child { padding-left: 12px; border-left: 2px solid var(--ink); }
+.svc summary .tag-soon { font-size: .8125rem; font-weight: 500; color: var(--retry-ink); border: 1px solid currentColor; border-radius: 999px; padding: 1px 10px; }
 
 /* Trabajo: dos proyectos, cada uno con sus problemas */
 .proj + .proj { margin-top: 72px; }
@@ -178,7 +188,7 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 @media (min-width: 860px) { .case-steps { grid-template-columns: repeat(3, 1fr); gap: 32px; } }
 .case-steps dt { font-size: .875rem; font-weight: 500; color: var(--graphite); margin-bottom: 4px; }
 .case-steps dd { margin: 0; font-size: 1rem; }
-.case-steps div:last-child dd { color: var(--accent); font-weight: 500; }
+.case-steps div:last-child dd { color: var(--ok-ink); font-weight: 500; }
 
 /* Antes y después de cada caso: un <details> nativo. Al abrirlo, el registro se reproduce línea a línea solo con CSS. */
 .replay { margin-top: 24px; }
@@ -204,27 +214,31 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 .chip { font: 500 .875rem var(--display); padding: 6px 14px; border-radius: 999px; border: 1px solid var(--rule); background: none; color: var(--graphite); cursor: pointer; transition: color .2s ease, border-color .2s ease, background-color .2s ease; }
 .chip:hover { color: var(--ink); border-color: var(--ink); }
 .chip.is-active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-.projects { display: grid; gap: 24px; }
-@media (min-width: 760px) { .projects { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1100px) { .projects { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); } }
-.project { padding: 32px; background: var(--paper); border: 1px solid var(--rule); border-radius: 12px; view-transition-name: match-element; display: grid; gap: 12px; align-content: start; }
+.projects { display: grid; }
+.project { display: grid; gap: 12px; padding: 32px 0; border-top: 1px solid var(--rule); view-transition-name: match-element; }
+.project:last-child { border-bottom: 1px solid var(--rule); }
+@media (min-width: 860px) {
+  .project { grid-template-columns: 240px 1fr; column-gap: 48px; }
+  .project > * { grid-column: 2; }
+  .project .project-state { grid-column: 1; grid-row: 1 / span 6; padding-top: 4px; }
+}
 .project[hidden] { display: none; }
-.project p { color: var(--graphite); }
-.project .project-state { font-size: .875rem; font-weight: 500; color: var(--retry); }
-.project .project-state.is-live { color: var(--ok); }
+.project p { color: var(--graphite); max-width: 64ch; }
+.project .project-state { font-size: .875rem; font-weight: 500; color: var(--retry-ink); }
+.project .project-state.is-live { color: var(--ok-ink); }
 .vt-candidaturas { view-transition-name: caso-candidaturas; }
 .stack { font: 400 .8125rem var(--mono); margin-top: 8px; }
 .links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 4px; }
 .project .links a { color: var(--ink); font-weight: 500; text-underline-offset: 4px; }
-.project .links a:hover { color: var(--accent); }
-.project-shot { width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 8px; }
+.project .links a:hover { text-decoration-thickness: 2px; }
+.project-shot { width: 100%; max-width: 520px; height: auto; border: 1px solid var(--rule); border-radius: 8px; }
 ::view-transition-group(*) { animation-duration: .3s; }
 
 /* Sobre mí: registro personal, tono cálido */
 .about { display: grid; gap: 48px; align-items: start; }
 @media (min-width: 860px) { .about { grid-template-columns: 360px 1fr; gap: 64px; } }
 .about-side { display: grid; gap: 24px; max-width: 360px; }
-.about-photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; border-radius: 12px; }
+.about-photo { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; }
 .log-warm { border-color: color-mix(in srgb, var(--warm) 30%, var(--log-rule)); }
 .log-warm .log-head span:first-child { color: var(--warm); }
 .now-lines { list-style: none; margin: 0; padding: 16px; display: grid; gap: 10px; }
