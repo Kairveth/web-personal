@@ -14,7 +14,7 @@ En `public/index.html` hay una plantilla comentada encima de la lista de proyect
 
 ## Publicación
 
-Cloudflare Pages publica la rama `main` sin comando de build. Directorio de salida: la raíz del repositorio.
+Cloudflare Workers publica la rama `main` sin paso de build. Wrangler sirve `public/` como assets estáticos (`wrangler.jsonc`). Cada pull request genera una preview con `wrangler preview`, que necesita el bloque `previews` en la configuración.
 
 ## Seguridad
 
