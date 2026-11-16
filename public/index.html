@@ -28,11 +28,12 @@
     <a class="brand" href="#inicio">Pedro Romero</a>
     <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">Menú</button>
     <nav id="nav" class="nav">
-      <a href="#servicios">Servicios</a>
       <a href="#casos">Trabajo</a>
-      <a href="#portfolio">Proyectos</a>
+      <a href="#servicios">Servicios</a>
       <a href="#sobre-mi">Sobre mí</a>
+      <a href="#portfolio">Proyectos</a>
       <a href="#contacto">Contacto</a>
+      <a class="nav-cta" href="https://cal.com/pedro-romero-alvarez/30min" rel="noopener noreferrer">Reservar llamada</a>
     </nav>
   </div>
 </header>
@@ -43,7 +44,10 @@
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <h1>Integraciones Salesforce que aguantan <span class="voz">un mal día.</span></h1>
-      <p class="lead">Soy Pedro, desarrollador Salesforce. Conecto tu org con el resto de tus sistemas. Si la pasarela reenvía un aviso o el ERP se cae, los datos siguen cuadrando.</p>
+      <div class="hero-intro">
+        <img class="hero-photo" src="assets/foto.jpg" alt="Pedro Romero Álvarez" width="720" height="900" />
+        <p class="lead">Soy Pedro, desarrollador Salesforce. Conecto tu org con el resto de tus sistemas. Si la pasarela reenvía un aviso o el ERP se cae, los datos siguen cuadrando.</p>
+      </div>
       <div class="actions">
         <a class="btn btn-primary" href="https://cal.com/pedro-romero-alvarez/30min" rel="noopener noreferrer">Reservar llamada</a>
         <a class="btn btn-quiet" href="#casos">Ver trabajo</a>
@@ -73,62 +77,38 @@
   <p class="wrap hero-meta">Altafulla, Tarragona · Desde 2019 con Salesforce · 9 certificaciones</p>
 </section>
 
-<section id="servicios" class="block">
-  <div class="wrap">
-    <h2 class="say">Lo que hago, y lo que no.</h2>
-    <div class="svc-list">
-      <details class="svc" name="servicios" open>
-        <summary><span>Integraciones Salesforce</span><span class="svc-sub">REST, SOAP y webhooks, con el sistema que toque</span></summary>
-        <div class="svc-body">
-          <p>Diseño y programo APIs REST propias y llamadas salientes con Named Credentials, con reintentos controlados y registro de fallos. Es para equipos que necesitan que dos sistemas se entiendan sin duplicar ni perder datos.</p>
-          <p>Te entrego el diseño de la integración, el código con pruebas, la documentación y la puesta en producción coordinada contigo.</p>
-          <p><strong>Qué no hago.</strong> No sustituyo una plataforma de integración empresarial cuando el volumen la exige. Te lo digo antes de empezar.</p>
-        </div>
-      </details>
-      <details class="svc" name="servicios">
-        <summary><span>Desarrollo Apex y LWC a medida</span><span class="svc-sub">lo que Flow no cubre</span></summary>
-        <div class="svc-body">
-          <p>Lógica en Apex, componentes Lightning Web Components y automatizaciones para lo que la configuración estándar no resuelve.</p>
-          <p>Recibes código con pruebas, el despliegue validado antes de tocar producción y notas con las decisiones que tomé.</p>
-          <p><strong>Qué no hago.</strong> No diseño la identidad visual de la marca. Trabajo con los componentes y patrones que ya use el cliente.</p>
-        </div>
-      </details>
-      <details class="svc" name="servicios">
-        <summary><span>Diagnóstico de integraciones</span><span class="svc-sub tag-soon">en desarrollo</span></summary>
-        <div class="svc-body">
-          <p>Reviso una org con integraciones en producción y te digo qué riesgos tiene. Es solo lectura: no despliego nada.</p>
-          <p>Entrego un informe con hallazgos, severidad, evidencia y un plan priorizado. El método completo lo estoy escribiendo. De momento tengo publicada la auditoría de un proyecto propio.</p>
-          <p><strong>Qué no hago.</strong> No accedo a una org sin permiso por escrito ni publico datos de clientes.</p>
-        </div>
-      </details>
-    </div>
-  </div>
-</section>
-
 <section id="casos" class="block">
   <div class="wrap">
     <h2 class="say">Tres problemas que cerré en mis dos proyectos más largos.</h2>
 
     <div class="proj">
       <div class="proj-head">
-        <h3>Cobros con Business Central y una pasarela de pago</h3>
-        <p>Conecté Salesforce con Microsoft Dynamics 365 Business Central y con una pasarela de pago. Salió por fases: primero las reservas con tasas, después el cobro en dos pagos y al final las anulaciones. También dependíamos de los equipos de Business Central y de la pasarela.</p>
+        <h3>Cobros de admisiones con una pasarela de pago</h3>
+        <p>Antes no había integración: cada cobro de una admisión se gestionaba a mano. Lo automaticé de punta a punta. Salesforce genera el enlace de pago y lo envía por email. La persona paga en la pasarela, la pasarela avisa a Salesforce por un webhook y Salesforce actualiza la admisión.</p>
+        <p>El equipo de la pasarela me dio los endpoints y cerramos juntos el acuerdo de integración: qué datos se envían y qué se responde. Después lo construí por fases:</p>
+        <ol class="proj-steps">
+          <li>El cobro de tasas, en un solo pago.</li>
+          <li>Un webhook idempotente. La pasarela me envía el id del pago y Salesforce actualiza la admisión.</li>
+          <li>La reserva, en uno o dos pagos y con plazo.</li>
+          <li>Las anulaciones, con devolución o sin ella.</li>
+        </ol>
+        <p>Cada paso cambia el estado de la admisión, sin que nadie lo toque a mano.</p>
       </div>
       <article class="case">
         <p class="case-tag">Pagos · Apex REST · OAuth 2.0</p>
         <div>
           <h4>Webhook de pagos que no duplica</h4>
           <dl class="case-steps">
-            <div><dt>Problema</dt><dd>La pasarela reenviaba avisos y cada reenvío creaba otro pago.</dd></div>
+            <div><dt>Problema</dt><dd>La pasarela puede reenviar el mismo aviso. Sin control, cada reenvío crearía otro pago.</dd></div>
             <div><dt>Decisión</dt><dd>Upsert por External ID con el identificador de la pasarela.</dd></div>
             <div><dt>Resultado</dt><dd>Cada pago se registra una vez, llegue el aviso las veces que llegue.</dd></div>
           </dl>
           <details class="replay">
             <summary>Ver el antes y el después</summary>
-            <figure class="log" aria-label="Simulación del aviso de pago repetido, antes y después">
+            <figure class="log" aria-label="Simulación del aviso de pago repetido, sin y con idempotencia">
               <figcaption class="log-head"><span>pagos.log</span><span>simulación</span></figcaption>
               <ol class="log-lines">
-                <li class="log-sep">Antes</li>
+                <li class="log-sep">Sin idempotencia</li>
                 <li><time>14:02:11</time><code>POST /apexrest/pagos</code><b class="s2">201</b><span>pago creado</span></li>
                 <li class="f-fault"><time>14:02:15</time><code>POST /apexrest/pagos</code><b class="s5">201</b><span>reenvío: otro pago, duplicado</span></li>
                 <li class="log-sep">Con upsert por External ID</li>
@@ -191,7 +171,7 @@
                 <li class="log-sep">Con una regla por dependencia</li>
                 <li><time>paso 1</time><code>borrar simulación</code><b class="s2">ok</b><span>simulación eliminada</span></li>
                 <li class="f-ok"><time>paso 2</time><code>oportunidad sin más simulaciones</code><b class="s2">borrada</b><span>no queda nada huérfano</span></li>
-                <li><time>paso 2</time><code>oportunidad con otra simulación</code><b class="s2">se conserva</b><span>solo se borra la simulación pedida</span></li>
+                <li><time>si no</time><code>oportunidad con otra simulación</code><b class="s2">se conserva</b><span>solo se borra la simulación pedida</span></li>
               </ol>
             </figure>
           </details>
@@ -201,7 +181,39 @@
   </div>
 </section>
 
-<section id="metodo" class="block block-tint">
+<section id="servicios" class="block block-tint">
+  <div class="wrap">
+    <h2 class="say">Lo que hago, y lo que no.</h2>
+    <div class="svc-list">
+      <details class="svc" name="servicios" open>
+        <summary><span>Integraciones Salesforce</span><span class="svc-sub">REST, SOAP y webhooks, con el sistema que toque</span></summary>
+        <div class="svc-body">
+          <p>Diseño y programo APIs REST propias y llamadas salientes con Named Credentials, con reintentos controlados y registro de fallos. Es para equipos que necesitan que dos sistemas se entiendan sin duplicar ni perder datos.</p>
+          <p>Te entrego el diseño de la integración, el código con pruebas, la documentación y la puesta en producción coordinada contigo.</p>
+          <p><strong>Qué no hago.</strong> No sustituyo una plataforma de integración empresarial cuando el volumen la exige. Te lo digo antes de empezar.</p>
+        </div>
+      </details>
+      <details class="svc" name="servicios">
+        <summary><span>Desarrollo Apex y LWC a medida</span><span class="svc-sub">lo que Flow no cubre</span></summary>
+        <div class="svc-body">
+          <p>Lógica en Apex, componentes Lightning Web Components y automatizaciones para lo que la configuración estándar no resuelve.</p>
+          <p>Recibes código con pruebas, el despliegue validado antes de tocar producción y notas con las decisiones que tomé.</p>
+          <p><strong>Qué no hago.</strong> No diseño la identidad visual de la marca. Trabajo con los componentes y patrones que ya use el cliente.</p>
+        </div>
+      </details>
+      <details class="svc" name="servicios">
+        <summary><span>Diagnóstico de integraciones</span><span class="svc-sub tag-soon">en desarrollo</span></summary>
+        <div class="svc-body">
+          <p>Reviso una org con integraciones en producción y te digo qué riesgos tiene. Es solo lectura: no despliego nada.</p>
+          <p>Entrego un informe con hallazgos, severidad, evidencia y un plan priorizado. El método completo lo estoy escribiendo. De momento tengo publicada la auditoría de un proyecto propio.</p>
+          <p><strong>Qué no hago.</strong> No accedo a una org sin permiso por escrito ni publico datos de clientes.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="metodo" class="block">
   <div class="wrap">
     <h2 class="say">Cuatro reglas que no me salto.</h2>
     <div class="rules">
@@ -220,6 +232,53 @@
       <div class="rule">
         <h3>Nada llega a producción por sorpresa</h3>
         <p>Valido el despliegue antes de lanzarlo y espero tu confirmación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre-mi" class="block block-tint">
+  <div class="wrap about">
+    <div class="about-side">
+      <img class="about-photo" src="assets/foto.jpg" alt="Pedro Romero Álvarez" width="720" height="900" loading="lazy" />
+      <figure class="log log-warm" aria-label="En qué ando ahora">
+        <figcaption class="log-head"><span>ahora.log</span><span>noviembre 2026</span></figcaption>
+        <ul class="now-lines">
+          <li><span class="k">entreno</span><span>mi primer Hyrox, en preparación</span></li>
+          <li><span class="k">deporte</span><span>correr y pádel</span></li>
+          <li><span class="k">pantalla</span><span>cine de acción y anime</span></li>
+          <li><span class="k">de fondo</span><span>música mientras programo</span></li>
+          <li><span class="k">compañía</span><span>Odin, mi perro, y sus paseos</span></li>
+          <li><span class="k">construyo</span><span>conciliación de pagos en Salesforce</span></li>
+        </ul>
+      </figure>
+    </div>
+    <div class="about-text">
+      <h2 class="about-lead voz">Me gustan los problemas que no se resuelven a la primera. Por eso trabajo en integraciones de Salesforce.</h2>
+      <p>Soy desarrollador Salesforce y trabajo cada vez más como freelance. Conecto Salesforce con otros sistemas. Hasta ahora, sobre todo pagos, ERP y portales.</p>
+      <p>Antes de tocar código, entiendo qué duele en el negocio: qué pasa cuando algo falla y qué tiene que cumplir para darse por terminado. Como freelance puedo dedicarle el tiempo que hace falta a ese problema. Después escribo lo mínimo que lo resuelve bien.</p>
+      <div class="experiencia">
+        <h3>Experiencia por sector</h3>
+        <ul>
+          <li><strong>Seguros, educación y tercer sector</strong> <span>2025-2026 · Sales Cloud y Service Cloud, integraciones REST, pagos y RGPD.</span></li>
+          <li><strong>Proyectos para consultoras</strong> <span>2022-2025 · Integraciones REST, LWC, Apex y Flow en equipos Scrum.</span></li>
+          <li><strong>Servicios legales y moda</strong> <span>2021-2022 · Automatización con Batch Apex, Apex, LWC y SOQL.</span></li>
+          <li><strong>Banca y contact center</strong> <span>2019-2020 · Apex, SOQL, triggers, Aura y cargas de datos.</span></li>
+        </ul>
+      </div>
+      <div class="certs-block">
+        <h3>Nueve certificaciones de Salesforce</h3>
+        <ul class="certs">
+      <li class="cert-main">Platform Integration Architect</li>
+      <li>Platform Developer II</li>
+      <li>Platform Developer I</li>
+      <li>Platform App Builder</li>
+      <li>Platform Administrator</li>
+      <li>JavaScript Developer I</li>
+      <li>Agentforce Specialist</li>
+      <li>AI Associate</li>
+      <li>Certified Associate</li>
+      </ul>
       </div>
     </div>
   </div>
@@ -268,57 +327,6 @@
         <p class="links"><a href="https://github.com/Kairveth/web-personal" rel="noopener noreferrer">Código</a></p>
       </article>
     </div>
-  </div>
-</section>
-
-<section id="sobre-mi" class="block block-tint">
-  <div class="wrap about">
-    <div class="about-side">
-      <img class="about-photo" src="assets/foto.jpg" alt="Pedro Romero Álvarez" width="720" height="900" loading="lazy" />
-      <figure class="log log-warm" aria-label="En qué ando ahora">
-        <figcaption class="log-head"><span>ahora.log</span><span>noviembre 2026</span></figcaption>
-        <ul class="now-lines">
-          <li><span class="k">entreno</span><span>mi primer Hyrox, en preparación</span></li>
-          <li><span class="k">deporte</span><span>correr y pádel</span></li>
-          <li><span class="k">pantalla</span><span>cine de acción y anime</span></li>
-          <li><span class="k">de fondo</span><span>música mientras programo</span></li>
-          <li><span class="k">compañía</span><span>Odin, mi perro, y sus paseos</span></li>
-          <li><span class="k">construyo</span><span>conciliación de pagos en Salesforce</span></li>
-        </ul>
-      </figure>
-    </div>
-    <div class="about-text">
-      <h2 class="about-lead voz">Me gustan los problemas que no se resuelven a la primera. Por eso trabajo en integraciones de Salesforce.</h2>
-      <p>Soy desarrollador Salesforce y trabajo cada vez más como freelance. Conecto Salesforce con otros sistemas. Hasta ahora, sobre todo pagos, ERP y portales.</p>
-      <p>Antes de tocar código, entiendo qué duele en el negocio: qué pasa cuando algo falla y qué tiene que cumplir para darse por terminado. Como freelance puedo dedicarle el tiempo que hace falta a ese problema. Después escribo lo mínimo que lo resuelve bien.</p>
-      <p>Me gustan los retos con fecha y con marcador. Estoy preparando mi primer Hyrox y quiero ver en números cuánto mejoro.</p>
-      <div class="experiencia">
-        <h3>Experiencia por sector</h3>
-        <ul>
-          <li><strong>Seguros, educación y tercer sector</strong> <span>2025-2026 · Sales Cloud y Service Cloud, integraciones REST, pagos y RGPD.</span></li>
-          <li><strong>Proyectos para consultoras</strong> <span>2022-2025 · Integraciones REST, LWC, Apex y Flow en equipos Scrum.</span></li>
-          <li><strong>Servicios legales y moda</strong> <span>2021-2022 · Automatización con Batch Apex, Apex, LWC y SOQL.</span></li>
-          <li><strong>Banca y contact center</strong> <span>2019-2020 · Apex, SOQL, triggers, Aura y cargas de datos.</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="certificaciones" class="block">
-  <div class="wrap">
-    <h2 class="say">Nueve certificaciones de Salesforce.</h2>
-    <ul class="certs">
-      <li class="cert-main">Platform Integration Architect</li>
-      <li>Platform Developer II</li>
-      <li>Platform Developer I</li>
-      <li>Platform App Builder</li>
-      <li>Platform Administrator</li>
-      <li>JavaScript Developer I</li>
-      <li>Agentforce Specialist</li>
-      <li>AI Associate</li>
-      <li>Certified Associate</li>
-    </ul>
   </div>
 </section>
 

@@ -67,12 +67,17 @@ main:focus { outline: none; }
 @starting-style { .nav.open { opacity: 0; translate: 0 -8px; } }
 .nav a { padding: 12px 0; text-decoration: none; color: var(--graphite); font-size: .9375rem; transition: color .2s ease; }
 .nav a:hover, .nav a:target-current { color: var(--ink); }
+.nav a.nav-cta { color: var(--ink); font-weight: 500; }
 @media (min-width: 860px) {
   .menu-toggle { display: none; }
   .nav, .nav.open { display: flex; flex-direction: row; gap: 32px; position: static; padding: 0; border: 0; background: none; }
   .nav a { padding: 0; position: relative; }
   .nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease); }
   .nav a:hover::after, .nav a:focus-visible::after, .nav a:target-current::after { transform: scaleX(1); }
+  .nav { align-items: center; }
+  .nav a.nav-cta { padding: 8px 14px; border-radius: 8px; background: var(--accent); color: var(--on-accent); transition: background-color .2s ease; }
+  .nav a.nav-cta:hover { background: var(--ink-soft); }
+  .nav a.nav-cta::after { display: none; }
 }
 
 /* Hero */
@@ -83,6 +88,9 @@ h1 { font-size: clamp(2.5rem, 5.6vw, 4.5rem); line-height: 1.02; letter-spacing:
 /* El subrayado ondulado es el de un error. Nace rojo y pasa a verde cuando el registro de al lado se recupera. */
 h1 .voz { display: inline-block; font-size: 1.06em; text-decoration: underline wavy var(--ok-ink); text-decoration-thickness: .055em; text-underline-offset: .14em; text-decoration-skip-ink: none; animation: mend .6s ease 3.5s both; }
 @keyframes mend { from { text-decoration-color: var(--fault-ink); } }
+.hero-intro { display: flex; gap: 16px; align-items: center; margin-top: 24px; }
+.hero-photo { flex: none; width: 76px; height: 76px; border-radius: 50%; object-fit: cover; object-position: 50% 22%; }
+.hero-intro .lead { margin-top: 0; }
 .lead { margin-top: 24px; max-width: 46ch; font-size: 1.1875rem; color: var(--graphite); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .btn { display: inline-flex; align-items: center; padding: 12px 20px; border-radius: 8px; font: 500 1rem var(--display); text-decoration: none; cursor: pointer; border: 1px solid var(--rule); background: none; color: var(--ink); transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .15s ease; }
@@ -179,6 +187,8 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 .proj-head { display: grid; gap: 12px; max-width: 68ch; margin-bottom: 24px; }
 .proj-head h3 { font-size: clamp(1.5rem, 2.6vw, 1.875rem); }
 .proj-head p { color: var(--graphite); }
+.proj-steps { margin: 0; padding-left: 1.4em; display: grid; gap: 6px; color: var(--ink); }
+.proj-steps li::marker { font-weight: 700; }
 .case { display: grid; gap: 16px; padding: 32px 0; border-top: 1px solid var(--rule); }
 .case:last-child { border-bottom: 1px solid var(--rule); }
 @media (min-width: 860px) { .case { grid-template-columns: 240px 1fr; gap: 48px; } }
@@ -253,11 +263,13 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 .experiencia li { padding: 14px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
 .experiencia li span { color: var(--graphite); font-size: .9375rem; }
 
-/* Certificaciones */
+/* Certificaciones, dentro de Sobre mí */
+.certs-block { margin-top: 32px; }
+.certs-block h3 { font-size: 1rem; font-weight: 500; letter-spacing: 0; color: var(--graphite); margin-bottom: 12px; }
 .certs { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 48px; }
 @media (min-width: 760px) { .certs { grid-template-columns: repeat(2, 1fr); } }
 .certs li { padding: 12px 0; border-bottom: 1px solid var(--rule); font-weight: 500; }
-.certs .cert-main { grid-column: 1 / -1; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em; padding: 0 0 16px; border-bottom: 2px solid var(--accent); }
+.certs .cert-main { grid-column: 1 / -1; font-size: clamp(1.25rem, 2.2vw, 1.5rem); font-weight: 700; letter-spacing: -0.02em; padding: 0 0 16px; border-bottom: 2px solid var(--accent); }
 
 /* Contacto */
 .contact-mail { display: inline-block; font-size: clamp(1.25rem, 6.2vw, 4.5rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; text-decoration: none; overflow-wrap: anywhere; background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 3px no-repeat; transition: background-size .35s ease; }
