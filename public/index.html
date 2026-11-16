@@ -3,14 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pedro Romero Álvarez · Desarrollador Salesforce</title>
-  <meta name="description" content="Pedro Romero Álvarez, desarrollador Salesforce especializado en integraciones y APIs REST." />
+  <title>Pedro Romero Álvarez · Integraciones Salesforce</title>
+  <meta name="description" content="Desarrollador Salesforce en Altafulla (Tarragona). Integraciones REST, Apex y LWC, 9 certificaciones. Freelance o empleo, remoto o presencial." />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:title" content="Pedro Romero Álvarez · Integraciones Salesforce" />
+  <meta property="og:description" content="Integraciones Salesforce con pagos, ERP y portales. Apex, LWC y APIs REST. Remoto o presencial en Tarragona y Barcelona." />
+  <meta name="twitter:card" content="summary" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Pedro Romero Álvarez","jobTitle":"Desarrollador Salesforce","address":{"@type":"PostalAddress","addressLocality":"Altafulla","addressRegion":"Tarragona","addressCountry":"ES"},"knowsAbout":["Salesforce","Apex","Lightning Web Components","APIs REST","Integraciones"],"sameAs":["https://www.linkedin.com/in/pedro-romero-alvarez-329b035a/","https://github.com/Kairveth"]}
+  </script>
   <link rel="preload" href="assets/fonts/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin />
-  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preload" href="assets/fonts/newsreader-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="styles.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
+<a class="skip" href="#main">Saltar al contenido</a>
 
 <header class="top">
   <div class="wrap top-inner">
@@ -26,40 +37,47 @@
   </div>
 </header>
 
-<main>
+<main id="main" tabindex="-1">
 
 <section id="inicio" class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <h1>Especialista en integraciones Salesforce.</h1>
-      <p class="lead">Diseño, programo y pongo en producción las conexiones que no pueden fallar.</p>
+      <h1>Integraciones Salesforce que aguantan <span class="voz">un mal día.</span></h1>
+      <p class="lead">Soy Pedro, desarrollador Salesforce. Conecto tu org con pagos, ERP y portales. Si la pasarela reenvía un aviso o el ERP se cae, los datos siguen cuadrando.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="https://cal.com/pedro-romero-alvarez/30min" rel="noopener">Reservar llamada</a>
-        <a class="btn btn-quiet" href="#contacto">Escribirme</a>
+        <a class="btn btn-primary" href="https://cal.com/pedro-romero-alvarez/30min" rel="noopener noreferrer">Reservar llamada</a>
         <a class="btn btn-quiet" href="#casos">Ver trabajo</a>
-        <a class="btn btn-quiet" href="assets/cv-pedro-romero-alvarez.pdf" download>Descargar CV</a>
       </div>
+      <p class="hero-links">O <a href="#contacto">escríbeme</a>, o <a href="assets/cv-pedro-romero-alvarez.pdf" download>descarga mi CV</a>.</p>
+      <p class="disponibilidad">Disponible ya · Freelance y empleo · Remoto, o presencial en Tarragona y Barcelona</p>
     </div>
-    <figure class="log" aria-label="Registro de ejemplo de una integración">
-      <figcaption class="log-head"><span>integracion.log</span><span>ejemplo</span></figcaption>
-      <ol class="log-lines">
-        <li style="--i:0"><time>14:02:11</time><code>POST /apexrest/pagos</code><b class="s2">201</b><span>pago creado</span></li>
-        <li style="--i:1"><time>14:02:15</time><code>POST /apexrest/pagos</code><b class="s2">200</b><span>reenvío: ya existía, sin duplicado</span></li>
-        <li style="--i:2"><time>14:03:40</time><code>GET erp/clientes/4471</code><b class="s5">503</b><span>ERP caído</span></li>
-        <li style="--i:3"><time>14:03:40</time><code>queueable</code><b class="s3">↻ 1/3</b><span>reintento programado</span></li>
-        <li style="--i:4"><time>14:04:10</time><code>GET erp/clientes/4471</code><b class="s2">200</b><span>cliente sincronizado</span></li>
+    <figure class="log" aria-label="Registro simulado de una integración">
+      <figcaption class="log-head"><span>integracion.log</span><span>simulación</span></figcaption>
+      <ol class="log-lines" id="registro" aria-live="polite">
+        <li><time>14:02:11</time><code>POST /apexrest/pagos</code><b class="s2">201</b><span>pago creado</span></li>
+        <li class="f-ok"><time>14:02:15</time><code>POST /apexrest/pagos</code><b class="s2">200</b><span>reenvío: ya existía, sin duplicado</span></li>
+        <li class="f-fault"><time>14:03:40</time><code>GET erp/clientes/4471</code><b class="s5">503</b><span>ERP caído</span></li>
+        <li><time>14:03:40</time><code>queueable</code><b class="s3">↻ 1/3</b><span>reintento programado</span></li>
+        <li><time>14:04:10</time><code>GET erp/clientes/4471</code><b class="s2">200</b><span>cliente sincronizado</span></li>
       </ol>
+      <div class="log-foot">
+        <p class="log-tally">Avisos recibidos: <b id="avisos">2</b> · Pagos en Salesforce: <b id="pagos">1</b></p>
+        <div class="log-actions">
+          <button class="log-btn" type="button" id="reenviar">Reenviar el aviso</button>
+          <button class="log-btn log-btn-fault" type="button" id="caida">Tirar el ERP</button>
+        </div>
+        <p class="log-hint">Pulsa y mira qué pasa. Es una simulación en tu navegador, no llama a ningún servidor.</p>
+      </div>
     </figure>
   </div>
-  <p class="wrap meta">Altafulla, Tarragona · Desde 2019 con Salesforce · 9 certificaciones</p>
-  <p class="wrap disponibilidad">Freelance y empleo · Remoto o presencial en el Área de Tarragona (Tarragona, Reus, El Vendrell, Valls) y Barcelona ciudad · Disponible ya · Tarifa a consultar según proyecto</p>
+  <p class="wrap hero-meta">Altafulla, Tarragona · Desde 2019 con Salesforce · 9 certificaciones</p>
 </section>
 
 <section id="servicios" class="block">
   <div class="wrap">
-    <h2 class="block-title">Servicios</h2>
+    <h2 class="say">Lo que hago, y lo que no.</h2>
     <div class="svc-list">
-      <details class="svc reveal" open>
+      <details class="svc" name="servicios" open>
         <summary><span>Integraciones Salesforce</span><span class="svc-sub">pagos, ERP y portales</span></summary>
         <div class="svc-body">
           <p><strong>Qué es.</strong> APIs REST propias y llamadas salientes con Named Credentials, reintentos controlados y registro de fallos.</p>
@@ -68,7 +86,7 @@
           <p><strong>Qué no hago.</strong> No sustituyo una plataforma de integración empresarial cuando el volumen la exige. Te lo digo antes de empezar.</p>
         </div>
       </details>
-      <details class="svc reveal">
+      <details class="svc" name="servicios">
         <summary><span>Desarrollo Apex y LWC a medida</span><span class="svc-sub">lo que Flow no cubre</span></summary>
         <div class="svc-body">
           <p><strong>Qué es.</strong> Lógica en Apex, componentes Lightning Web Components y automatizaciones que la configuración estándar no resuelve.</p>
@@ -77,7 +95,7 @@
           <p><strong>Qué no hago.</strong> No diseño la identidad visual de la marca. Trabajo con los componentes y patrones que ya use el cliente.</p>
         </div>
       </details>
-      <details class="svc reveal">
+      <details class="svc" name="servicios">
         <summary><span>Diagnóstico de integraciones</span><span class="svc-sub tag-soon">en desarrollo</span></summary>
         <div class="svc-body">
           <p><strong>Qué es.</strong> Revisión de una org con integraciones: qué reviso, en qué orden y qué entrego. Tengo una auditoría publicada de un proyecto propio. El método completo sigue en redacción.</p>
@@ -92,47 +110,128 @@
 
 <section id="casos" class="block">
   <div class="wrap">
-    <h2 class="block-title">Trabajo profesional</h2>
-    <article class="case reveal">
-      <p class="case-tag">Pagos · Apex REST · OAuth 2.0</p>
-      <div>
-        <h3>Webhook de pagos que no duplica</h3>
-        <dl class="case-steps">
-          <div><dt>Problema</dt><dd>La pasarela reenviaba avisos y cada reenvío creaba otro pago.</dd></div>
-          <div><dt>Decisión</dt><dd>Upsert por External ID con el identificador de la pasarela.</dd></div>
-          <div><dt>Resultado</dt><dd>Cada pago se registra una vez, llegue el aviso las veces que llegue.</dd></div>
-        </dl>
+    <h2 class="say">Tres problemas que cerré en mis dos proyectos más largos.</h2>
+
+    <div class="proj">
+      <div class="proj-head">
+        <h3>Cobros con Business Central y una pasarela de pago</h3>
+        <p>Conecté Salesforce con Microsoft Dynamics 365 Business Central y con una pasarela de pago. Salió por fases: primero las reservas con tasas, después el cobro en dos pagos y al final las anulaciones. También dependíamos de los equipos de Business Central y de la pasarela.</p>
       </div>
-    </article>
-    <article class="case reveal">
-      <p class="case-tag">Cobros · Custom Metadata · Batch</p>
-      <div>
-        <h3>Reglas de cobro sin despliegues</h3>
-        <dl class="case-steps">
-          <div><dt>Problema</dt><dd>Cada cambio de regla exigía tocar código y desplegar.</dd></div>
-          <div><dt>Decisión</dt><dd>Mover las reglas a Custom Metadata, con 12 plantillas.</dd></div>
-          <div><dt>Resultado</dt><dd>Negocio cambia las reglas sin pasar por desarrollo.</dd></div>
-        </dl>
+      <article class="case">
+        <p class="case-tag">Pagos · Apex REST · OAuth 2.0</p>
+        <div>
+          <h4>Webhook de pagos que no duplica</h4>
+          <dl class="case-steps">
+            <div><dt>Problema</dt><dd>La pasarela reenviaba avisos y cada reenvío creaba otro pago.</dd></div>
+            <div><dt>Decisión</dt><dd>Upsert por External ID con el identificador de la pasarela.</dd></div>
+            <div><dt>Resultado</dt><dd>Cada pago se registra una vez, llegue el aviso las veces que llegue.</dd></div>
+          </dl>
+          <details class="replay">
+            <summary>Ver el antes y el después</summary>
+            <figure class="log" aria-label="Simulación del aviso de pago repetido, antes y después">
+              <figcaption class="log-head"><span>pagos.log</span><span>simulación</span></figcaption>
+              <ol class="log-lines">
+                <li class="log-sep">Antes</li>
+                <li><time>14:02:11</time><code>POST /apexrest/pagos</code><b class="s2">201</b><span>pago creado</span></li>
+                <li class="f-fault"><time>14:02:15</time><code>POST /apexrest/pagos</code><b class="s5">201</b><span>reenvío: otro pago, duplicado</span></li>
+                <li class="log-sep">Con upsert por External ID</li>
+                <li><time>14:02:11</time><code>POST /apexrest/pagos</code><b class="s2">201</b><span>pago creado</span></li>
+                <li class="f-ok"><time>14:02:15</time><code>POST /apexrest/pagos</code><b class="s2">200</b><span>reenvío: ya existía, sin duplicado</span></li>
+              </ol>
+            </figure>
+          </details>
+        </div>
+      </article>
+      <article class="case">
+        <p class="case-tag">Cobros · Custom Metadata · Batch</p>
+        <div>
+          <h4>Reglas de cobro sin despliegues</h4>
+          <dl class="case-steps">
+            <div><dt>Problema</dt><dd>Cada cambio de regla exigía tocar código y desplegar.</dd></div>
+            <div><dt>Decisión</dt><dd>Mover las reglas a Custom Metadata, con 12 plantillas.</dd></div>
+            <div><dt>Resultado</dt><dd>Negocio cambia las reglas sin pasar por desarrollo.</dd></div>
+          </dl>
+          <details class="replay">
+            <summary>Ver el antes y el después</summary>
+            <figure class="log" aria-label="Simulación del cambio de una regla de cobro, antes y después">
+              <figcaption class="log-head"><span>cobros.log</span><span>simulación</span></figcaption>
+              <ol class="log-lines">
+                <li class="log-sep">Antes</li>
+                <li><time>lunes</time><code>cambiar una regla de cobro</code><b class="s3">petición</b><span>negocio la pide a desarrollo</span></li>
+                <li class="f-fault"><time>después</time><code>código, pruebas y despliegue</code><b class="s5">espera</b><span>la regla no cambia hasta desplegar</span></li>
+                <li class="log-sep">Con las reglas en Custom Metadata</li>
+                <li class="f-ok"><time>lunes</time><code>editar la plantilla de cobro</code><b class="s2">hecho</b><span>negocio cambia la regla, sin despliegue</span></li>
+                <li><time>noche</time><code>batch de cobros caducados</code><b class="s2">ok</b><span>cancela el cobro y cierra su oportunidad</span></li>
+              </ol>
+            </figure>
+          </details>
+        </div>
+      </article>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head">
+        <h3>RGPD en una aseguradora: borrado en cascada y firma por OTP</h3>
+        <p>Dos piezas: el borrado RGPD en cascada y una firma por OTP con API REST y LWC. Fue largo. Hubo discrepancias con el cliente y tocó resolverlas por el camino.</p>
       </div>
-    </article>
-    <article class="case reveal">
-      <p class="case-tag">RGPD · Apex · Sharing</p>
-      <div>
-        <h3>Borrado RGPD en cascada</h3>
-        <dl class="case-steps">
-          <div><dt>Problema</dt><dd>El motor de borrado estaba en producción con 8 defectos.</dd></div>
-          <div><dt>Decisión</dt><dd>Reglas explícitas por cada dependencia entre objetos.</dd></div>
-          <div><dt>Resultado</dt><dd>El borrado recorre las relaciones de forma controlada.</dd></div>
-        </dl>
-      </div>
-    </article>
+      <article class="case">
+        <p class="case-tag">RGPD · Apex · Sharing</p>
+        <div>
+          <h4>Borrado RGPD en cascada</h4>
+          <dl class="case-steps">
+            <div><dt>Problema</dt><dd>El motor de borrado estaba en producción con 8 defectos.</dd></div>
+            <div><dt>Decisión</dt><dd>Reglas explícitas por cada dependencia entre objetos.</dd></div>
+            <div><dt>Resultado</dt><dd>El borrado recorre las relaciones de forma controlada.</dd></div>
+          </dl>
+          <details class="replay">
+            <summary>Ver el antes y el después</summary>
+            <figure class="log" aria-label="Simulación del borrado de una simulación y su oportunidad, antes y después">
+              <figcaption class="log-head"><span>borrado.log</span><span>simulación</span></figcaption>
+              <ol class="log-lines">
+                <li class="log-sep">Antes</li>
+                <li><time>paso 1</time><code>borrar simulación</code><b class="s2">ok</b><span>simulación eliminada</span></li>
+                <li class="f-fault"><time>paso 2</time><code>oportunidad asociada</code><b class="s5">sigue</b><span>se queda huérfana, sin simulaciones</span></li>
+                <li class="log-sep">Con una regla por dependencia</li>
+                <li><time>paso 1</time><code>borrar simulación</code><b class="s2">ok</b><span>simulación eliminada</span></li>
+                <li class="f-ok"><time>paso 2</time><code>oportunidad sin más simulaciones</code><b class="s2">borrada</b><span>no queda nada huérfano</span></li>
+                <li><time>paso 2</time><code>oportunidad con otra simulación</code><b class="s2">se conserva</b><span>solo se borra la simulación pedida</span></li>
+              </ol>
+            </figure>
+          </details>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
-<section id="portfolio" class="block block-tint">
+<section id="metodo" class="block block-tint">
+  <div class="wrap">
+    <h2 class="say">Cuatro reglas que no me salto.</h2>
+    <div class="rules">
+      <div class="rule">
+        <h3>Te digo lo que no haría</h3>
+        <p>Antes de empezar sabes qué queda fuera y por qué. Lo tienes escrito en cada servicio de esta página.</p>
+      </div>
+      <div class="rule">
+        <h3>Escribo lo mínimo que lo resuelve bien</h3>
+        <p>Si una fórmula o un Flow bastan, no escribo Apex. Así hay menos que mantener después.</p>
+      </div>
+      <div class="rule">
+        <h3>Las pruebas comprueban el resultado</h3>
+        <p>Los tests llevan aserciones, y los triggers y los batch se prueban con 200 registros. Llegar al porcentaje de cobertura no me basta.</p>
+      </div>
+      <div class="rule">
+        <h3>Nada llega a producción por sorpresa</h3>
+        <p>Valido el despliegue antes de lanzarlo y espero tu confirmación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio" class="block">
   <div class="wrap">
     <div class="block-head">
-      <h2 class="block-title">Proyectos propios</h2>
+      <h2 class="say">Lo que construyo por mi cuenta.</h2>
       <div class="filters" role="group" aria-label="Filtrar proyectos" hidden></div>
     </div>
     <!--
@@ -141,29 +240,35 @@
       Estado: "En construcción" o "Publicado" (para Publicado añade la clase is-live).
       Enlaces: borra los que no existan.
 
-      <article class="project reveal" data-cat="Salesforce">
+      <article class="project" data-cat="Salesforce">
         <p class="project-state">En construcción</p>
         <h3>Nombre del proyecto</h3>
         <p>Qué problema resuelve, en una o dos frases.</p>
         <p class="stack">Tecnología · Tecnología</p>
-        <p class="links"><a href="https://github.com/...">Código</a><a href="https://...">Demo</a></p>
+        <p class="links"><a href="https://github.com/..." rel="noopener noreferrer">Código</a><a href="https://..." rel="noopener noreferrer">Demo</a></p>
       </article>
     -->
     <div class="projects">
-      <article class="project reveal" data-cat="Salesforce">
+      <article class="project" data-cat="Salesforce">
         <p class="project-state is-live">Publicado</p>
-        <h3>API de candidaturas en Salesforce</h3>
+        <h3 class="vt-candidaturas">API de candidaturas en Salesforce</h3>
         <p>Una API REST crea o actualiza candidaturas sin duplicados. Al pasar a Entrevista, un Queueable envía el lote a un sistema externo y reintenta si falla.</p>
         <img class="project-shot" src="assets/mini-crm/webhook.png" alt="Petición POST recibida en webhook.site desde Salesforce con el lote de una candidatura en Entrevista" width="1597" height="793" loading="lazy" />
         <p class="stack">Apex REST · Trigger · Queueable · Named Credentials · LWC</p>
-        <p class="links"><a href="https://github.com/Kairveth/sf-candidaturas-api">Código</a><a href="caso/">Caso técnico</a><a href="caso/auditoria-candidaturas/">Auditoría</a></p>
+        <p class="links"><a href="https://github.com/Kairveth/sf-candidaturas-api" rel="noopener noreferrer">Código</a><a href="caso/">Caso técnico</a><a href="caso/auditoria-candidaturas/">Auditoría</a></p>
       </article>
-      <article class="project reveal" data-cat="Web">
+      <article class="project" data-cat="Salesforce">
+        <p class="project-state">En construcción</p>
+        <h3>Conciliación de pagos en Salesforce</h3>
+        <p>Cuadra los cobros de la pasarela con las facturas del ERP y los movimientos del banco, y abre una incidencia cuando no casan. El modelo de datos, los permisos y el plan de pruebas están hechos. El código empieza ahora.</p>
+        <p class="stack">Modelo de datos · Permission Sets · Custom Metadata</p>
+      </article>
+      <article class="project" data-cat="Web">
         <p class="project-state is-live">Publicado</p>
         <h3>Esta web</h3>
-        <p>HTML, CSS y unas pocas líneas de JavaScript. Sin frameworks ni dependencias.</p>
-        <p class="stack">HTML · CSS · JavaScript</p>
-        <p class="links"><a href="https://github.com/Kairveth/web-personal">Código</a></p>
+        <p>HTML, CSS y unas pocas líneas de JavaScript, sin frameworks ni dependencias. El registro de arriba está hecho a mano. La página no carga nada de terceros y sale con una política de seguridad de contenido estricta.</p>
+        <p class="stack">HTML · CSS · JavaScript · View Transitions · CSP</p>
+        <p class="links"><a href="https://github.com/Kairveth/web-personal" rel="noopener noreferrer">Código</a></p>
       </article>
     </div>
   </div>
@@ -171,30 +276,42 @@
 
 <section id="sobre-mi" class="block block-tint">
   <div class="wrap about">
-    <img class="about-photo reveal" src="assets/foto.jpg" alt="Pedro Romero Álvarez" width="360" height="450" loading="lazy" />
-    <div class="about-text reveal">
-      <h2 class="block-title">Sobre mí</h2>
-      <p class="about-lead">Me gustan los problemas que no se resuelven a la primera. Por eso trabajo en integraciones de Salesforce.</p>
+    <div class="about-side">
+      <img class="about-photo" src="assets/foto.jpg" alt="Pedro Romero Álvarez" width="360" height="450" loading="lazy" />
+      <figure class="log log-warm" aria-label="En qué ando ahora">
+        <figcaption class="log-head"><span>ahora.log</span><span>noviembre 2026</span></figcaption>
+        <ul class="now-lines">
+          <li><span class="k">entreno</span><span>mi primer Hyrox, en preparación</span></li>
+          <li><span class="k">deporte</span><span>correr y pádel</span></li>
+          <li><span class="k">pantalla</span><span>cine de acción y anime</span></li>
+          <li><span class="k">de fondo</span><span>música mientras programo</span></li>
+          <li><span class="k">compañía</span><span>Odin, mi perro, y sus paseos</span></li>
+          <li><span class="k">construyo</span><span>conciliación de pagos en Salesforce</span></li>
+        </ul>
+      </figure>
+    </div>
+    <div class="about-text">
+      <h2 class="about-lead voz">Me gustan los problemas que no se resuelven a la primera. Por eso trabajo en integraciones de Salesforce.</h2>
       <p>Soy desarrollador Salesforce y trabajo cada vez más como freelance. Conecto Salesforce con pagos, ERP y portales. He construido un webhook que no duplica cobros. Las reglas de cobro cambian sin desplegar, y el borrado RGPD tiene reglas explícitas para cada dependencia entre objetos.</p>
       <p>Antes de tocar código, entiendo qué duele en el negocio: qué pasa cuando algo falla y qué tiene que cumplir para darse por terminado. Como freelance puedo dedicarle el tiempo que hace falta a ese problema. Después escribo lo mínimo que lo resuelve bien.</p>
-      <p>Me gustan los retos con fecha y con marcador. Estoy preparando mi primer Hyrox y quiero medir cuánto mejoro, sin quedarme con la sensación. Corro, juego al pádel, veo cine de acción y anime, y escucho música mientras programo. Y paseo con Odin, mi perro.</p>
-      <div class="experiencia reveal">
+      <p>Me gustan los retos con fecha y con marcador. Estoy preparando mi primer Hyrox y quiero medir cuánto mejoro, sin quedarme con la sensación.</p>
+      <div class="experiencia">
         <h3>Experiencia por sector</h3>
         <ul>
-          <li><strong>Seguros, educación y tercer sector</strong> <span>2025–2026 · Sales Cloud y Service Cloud, integraciones REST, pagos y RGPD.</span></li>
-          <li><strong>Proyectos para consultoras</strong> <span>2022–2025 · Integraciones REST, LWC, Apex y Flow en equipos Scrum.</span></li>
-          <li><strong>Servicios legales y moda</strong> <span>2021–2022 · Automatización con Batch Apex, Apex, LWC y SOQL.</span></li>
-          <li><strong>Banca y contact center</strong> <span>2019–2020 · Apex, SOQL, triggers, Aura y cargas de datos.</span></li>
+          <li><strong>Seguros, educación y tercer sector</strong> <span>2025-2026 · Sales Cloud y Service Cloud, integraciones REST, pagos y RGPD.</span></li>
+          <li><strong>Proyectos para consultoras</strong> <span>2022-2025 · Integraciones REST, LWC, Apex y Flow en equipos Scrum.</span></li>
+          <li><strong>Servicios legales y moda</strong> <span>2021-2022 · Automatización con Batch Apex, Apex, LWC y SOQL.</span></li>
+          <li><strong>Banca y contact center</strong> <span>2019-2020 · Apex, SOQL, triggers, Aura y cargas de datos.</span></li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section id="certificaciones" class="block block-tint">
+<section id="certificaciones" class="block">
   <div class="wrap">
-    <h2 class="block-title">Certificaciones Salesforce</h2>
-    <ul class="certs reveal">
+    <h2 class="say">Nueve certificaciones de Salesforce.</h2>
+    <ul class="certs">
       <li class="cert-main">Platform Integration Architect</li>
       <li>Platform Developer II</li>
       <li>Platform Developer I</li>
@@ -208,16 +325,21 @@
   </div>
 </section>
 
-<section id="contacto" class="block contact">
+<section id="contacto" class="block block-tint contact">
   <div class="wrap">
-    <h2 class="block-title">Contacto</h2>
+    <h2 class="say">Cuéntame qué falla.</h2>
     <a class="contact-mail" href="mailto:pedroralvarez@outlook.es">pedroralvarez@outlook.es</a>
     <div class="actions">
-      <a class="btn btn-primary" href="https://cal.com/pedro-romero-alvarez/30min" rel="noopener">Reservar llamada</a>
-      <button class="btn btn-quiet" type="button" id="copiar">Copiar correo</button>
-      <a class="btn btn-quiet" href="https://www.linkedin.com/in/pedro-romero-alvarez-329b035a/" rel="noopener">LinkedIn</a>
+      <a class="btn btn-primary" href="https://cal.com/pedro-romero-alvarez/30min" rel="noopener noreferrer">Reservar llamada</a>
+      <button class="btn btn-quiet" type="button" id="copiar" data-mail="pedroralvarez@outlook.es">Copiar correo</button>
+      <a class="btn btn-quiet" href="https://www.linkedin.com/in/pedro-romero-alvarez-329b035a/" rel="noopener noreferrer">LinkedIn</a>
     </div>
-    <p class="contact-note">Escríbeme a pedroralvarez@outlook.es y te propongo hueco para una llamada.</p>
+    <ol class="steps">
+      <li>Hablamos 30 minutos. Me cuentas qué falla o qué quieres construir.</li>
+      <li>Te digo si puedo ayudarte, y qué no haría.</li>
+      <li>Si te encaja, te mando una propuesta con alcance, plazo y precio.</li>
+    </ol>
+    <p class="contact-note">Freelance y empleo · Remoto o presencial en el Área de Tarragona (Tarragona, Reus, El Vendrell, Valls) y Barcelona ciudad · Tarifa a consultar según proyecto</p>
   </div>
 </section>
 
@@ -226,6 +348,8 @@
 <footer class="foot">
   <div class="wrap foot-inner">
     <span>© 2026 Pedro Romero Álvarez</span>
+    <span>Hecho a mano con HTML y CSS, sin frameworks.</span>
+    <span class="foot-links"><a href="https://github.com/Kairveth" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/pedro-romero-alvarez-329b035a/" rel="noopener noreferrer">LinkedIn</a></span>
   </div>
 </footer>
 
