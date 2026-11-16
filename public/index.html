@@ -149,7 +149,9 @@
     <div class="proj">
       <div class="proj-head">
         <h3>RGPD en una aseguradora: borrado en cascada y firma por OTP</h3>
-        <p>Dos piezas: el borrado RGPD en cascada y una firma por OTP con API REST y LWC. Fue largo. Hubo discrepancias con el cliente y tocó resolverlas por el camino.</p>
+        <p>Dos integraciones distintas. Fue un proyecto largo, con discrepancias con el cliente que tocó resolver por el camino.</p>
+        <p><strong>Borrado en cascada.</strong> El sistema del cliente envía el identificador externo de una persona y Salesforce localiza su cuenta. De ella cuelgan oportunidades, pólizas con sus suplementos, presupuestos, simulaciones, cotizaciones y otros objetos propios. El borrado va de abajo arriba: cada objeto se borra solo si ya no tiene nada relacionado por debajo, y la cuenta cae la última, cuando se ha quedado vacía. La primera petición fue anonimizar por completo.</p>
+        <p><strong>Firma por OTP.</strong> Un LWC permite revisar y corregir el email o el móvil de contacto. Con ese dato, Salesforce pregunta al middleware del cliente qué consentimientos faltan por firmar, y un iframe muestra antes todos los consentimientos RGPD.</p>
       </div>
       <article class="case">
         <p class="case-tag">RGPD · Apex · Sharing</p>
