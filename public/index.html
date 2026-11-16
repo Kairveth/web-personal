@@ -202,10 +202,10 @@
         </div>
       </details>
       <details class="svc" name="servicios">
-        <summary><span>Diagnóstico de integraciones</span><span class="svc-sub tag-soon">en desarrollo</span></summary>
+        <summary><span>Diagnóstico de integraciones</span><span class="svc-sub">solo lectura, con informe y plan</span></summary>
         <div class="svc-body">
           <p>Reviso una org con integraciones en producción y te digo qué riesgos tiene. Es solo lectura: no despliego nada.</p>
-          <p>Entrego un informe con hallazgos, severidad, evidencia y un plan priorizado. El método completo lo estoy escribiendo. De momento tengo publicada la auditoría de un proyecto propio.</p>
+          <p>Entrego un informe con hallazgos, severidad, evidencia y un plan priorizado. Puedes ver cómo es en la <a href="caso/auditoria-candidaturas/">auditoría de uno de mis proyectos</a>.</p>
           <p><strong>Qué no hago.</strong> No accedo a una org sin permiso por escrito ni publico datos de clientes.</p>
         </div>
       </details>
@@ -215,25 +215,34 @@
 
 <section id="metodo" class="block">
   <div class="wrap">
-    <h2 class="say">Cuatro reglas que no me salto.</h2>
-    <div class="rules">
-      <div class="rule">
-        <h3>Te digo lo que no haría</h3>
-        <p>Antes de empezar sabes qué queda fuera y por qué. Lo tienes escrito en cada servicio de esta página.</p>
-      </div>
-      <div class="rule">
-        <h3>Escribo lo mínimo que lo resuelve bien</h3>
+    <h2 class="say">Cómo trabajo, de la primera llamada al despliegue.</h2>
+    <ol class="method">
+      <li class="step">
+        <h3>Entender qué duele</h3>
+        <p>Antes de abrir la org, hablamos de qué falla, a quién le cuesta y cuándo se dará por terminado. También de qué volumen tiene que aguantar y qué pasa si el otro sistema se cae.</p>
+        <p class="step-out"><b>Recibes:</b> el problema y los criterios de aceptación por escrito.</p>
+      </li>
+      <li class="step">
+        <h3>Acotar</h3>
+        <p>Te digo qué haría, qué no y por qué. Si lo que necesitas no es lo mío, te lo digo antes de empezar.</p>
+        <p class="step-out"><b>Recibes:</b> alcance, plazo y precio por escrito antes de empezar.</p>
+      </li>
+      <li class="step">
+        <h3>Elegir lo mínimo que aguanta</h3>
         <p>Si una fórmula o un Flow bastan, no escribo Apex. Así hay menos que mantener después.</p>
-      </div>
-      <div class="rule">
-        <h3>Las pruebas comprueban el resultado</h3>
-        <p>Los tests llevan aserciones, y los triggers y los batch se prueban con 200 registros. Llegar al porcentaje de cobertura no me basta.</p>
-      </div>
-      <div class="rule">
-        <h3>Nada llega a producción por sorpresa</h3>
+        <p class="step-out"><b>Recibes:</b> la solución elegida, la alternativa que descarté y hasta qué volumen aguanta.</p>
+      </li>
+      <li class="step">
+        <h3>Construir con pruebas</h3>
+        <p>Los tests comprueban resultados, no solo cobertura. Los triggers y los batch se prueban con 200 registros.</p>
+        <p class="step-out"><b>Recibes:</b> código con pruebas que fallan si algo se rompe.</p>
+      </li>
+      <li class="step">
+        <h3>Desplegar sin sorpresas</h3>
         <p>Valido el despliegue antes de lanzarlo y espero tu confirmación.</p>
-      </div>
-    </div>
+        <p class="step-out"><b>Recibes:</b> el despliegue validado y notas de cada decisión.</p>
+      </li>
+    </ol>
   </div>
 </section>
 

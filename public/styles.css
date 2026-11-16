@@ -219,6 +219,23 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 .rule h3 { font-size: 1.25rem; }
 .rule p { color: var(--graphite); max-width: 48ch; }
 
+/* Método: cada paso acaba en algo que el cliente recibe */
+.method { list-style: none; margin: 0; padding: 0; counter-reset: paso; }
+.step { counter-increment: paso; display: grid; grid-template-columns: 2.25rem 1fr; gap: 6px 16px; padding: 24px 0; border-top: 1px solid var(--rule); }
+.step:last-child { border-bottom: 1px solid var(--rule); }
+.step::before { content: counter(paso); grid-row: 1 / span 3; font-size: 1.5rem; font-weight: 800; line-height: 1.2; }
+.step h3 { font-size: 1.25rem; }
+.step p { color: var(--graphite); max-width: 60ch; }
+.step .step-out { color: var(--ink); }
+.step .step-out b { color: var(--ok-ink); font-weight: 700; }
+@media (min-width: 860px) {
+  .step { grid-template-columns: 2.5rem minmax(0, 1fr) minmax(0, 1fr); column-gap: 32px; }
+  .step::before { grid-row: 1 / span 2; }
+  .step h3 { grid-column: 2; }
+  .step p { grid-column: 2; }
+  .step .step-out { grid-column: 3; grid-row: 1 / span 2; align-self: center; padding-left: 16px; border-left: 2px solid var(--ok-ink); }
+}
+
 /* Portfolio */
 .filters { display: flex; gap: 8px; }
 .chip { font: 500 .875rem var(--display); padding: 6px 14px; border-radius: 999px; border: 1px solid var(--rule); background: none; color: var(--graphite); cursor: pointer; transition: color .2s ease, border-color .2s ease, background-color .2s ease; }
