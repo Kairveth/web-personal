@@ -31,14 +31,55 @@
   --log-ink: #d9dee5;
   --log-dim: #7d8794;
   --log-rule: #262c35;
+  --log-edge: #0d1117;
   --display: 'Schibsted Grotesk', system-ui, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, monospace;
   --voz: 'Newsreader', Georgia, serif;
   --ease: cubic-bezier(.2, .7, .2, 1);
   --max: 1120px;
 }
+/* Modo oscuro: sigue al sistema salvo que la persona elija con el botón (data-theme lo fija theme.js antes de pintar) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  color-scheme: dark;
+  --paper: #0e1420;
+  --paper-tint: #131b2a;
+  --surface: #121a28;
+  --ink: #e8ecf2;
+  --ink-soft: #c9d1dd;
+  --graphite: #9aa6b8;
+  --rule: #263044;
+  --accent: #e8ecf2;
+  --on-accent: #0e1420;
+  --ok-ink: #3fbf8f;
+  --retry-ink: #e0a03a;
+  --fault-ink: #ef6b5b;
+  --log-bg: #090d14;
+  --log-edge: #263044;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0e1420;
+  --paper-tint: #131b2a;
+  --surface: #121a28;
+  --ink: #e8ecf2;
+  --ink-soft: #c9d1dd;
+  --graphite: #9aa6b8;
+  --rule: #263044;
+  --accent: #e8ecf2;
+  --on-accent: #0e1420;
+  --ok-ink: #3fbf8f;
+  --retry-ink: #e0a03a;
+  --fault-ink: #ef6b5b;
+  --log-bg: #090d14;
+  --log-edge: #263044;
+}
+
 /* Bloque invertido: mismas variables, valores cruzados */
 .invert { --paper: #101828; --surface: #101828; --ink: #f4f5f7; --ink-soft: #d3d8e0; --graphite: #a9b2c0; --rule: #2a3550; --accent: #f4f5f7; --on-accent: #101828; background: var(--paper); color: var(--ink); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .invert { --paper: #161f30; --surface: #161f30; --rule: #2c3851; } }
+:root[data-theme="dark"] .invert { --paper: #161f30; --surface: #161f30; --rule: #2c3851; }
 
 @view-transition { navigation: auto; }
 
@@ -59,7 +100,13 @@ main:focus { outline: none; }
 
 /* Cabecera */
 .top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); }
-.top-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; position: relative; scroll-target-group: auto; }
+.top-inner { display: flex; align-items: center; gap: 12px; height: 64px; position: relative; scroll-target-group: auto; }
+.brand { margin-right: auto; }
+.theme-toggle { display: inline-grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid var(--rule); border-radius: 8px; background: none; color: var(--ink); cursor: pointer; transition: border-color .2s ease; }
+.theme-toggle:hover { border-color: var(--ink); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .moon, [data-theme-now="dark"] .theme-toggle .sun { display: block; }
+.theme-toggle .sun, [data-theme-now="dark"] .theme-toggle .moon { display: none; }
 .brand { font-weight: 800; letter-spacing: -0.02em; text-decoration: none; font-size: 1.125rem; }
 .menu-toggle { font: 500 .875rem var(--display); background: none; border: 1px solid var(--rule); border-radius: 6px; padding: 6px 12px; color: var(--ink); cursor: pointer; }
 .nav { display: none; }
@@ -70,6 +117,8 @@ main:focus { outline: none; }
 .nav a.nav-cta { color: var(--ink); font-weight: 500; }
 @media (min-width: 860px) {
   .menu-toggle { display: none; }
+  .nav { order: 1; }
+  .theme-toggle { order: 2; }
   .nav, .nav.open { display: flex; flex-direction: row; gap: 32px; position: static; padding: 0; border: 0; background: none; }
   .nav a { padding: 0; position: relative; }
   .nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease); }
@@ -105,7 +154,7 @@ h1 .voz { display: inline-block; font-size: 1.06em; text-decoration: underline w
 .hero-meta { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: .875rem; color: var(--graphite); }
 
 /* Registro (elemento firma) */
-.log { margin: 0; background: var(--log-bg); color: var(--log-ink); border: 1px solid var(--log-bg); border-radius: 12px; font: 400 .8125rem/1.5 var(--mono); overflow: hidden; }
+.log { margin: 0; background: var(--log-bg); color: var(--log-ink); border: 1px solid var(--log-edge); border-radius: 12px; font: 400 .8125rem/1.5 var(--mono); overflow: hidden; }
 .log-head { display: flex; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--log-rule); color: var(--log-dim); }
 .log-lines { list-style: none; margin: 0; padding: 16px; display: grid; gap: 8px; }
 .log-lines::after { content: ''; width: .6em; height: 1.1em; margin-left: 8px; background: var(--log-dim); animation: blink 1s steps(1) infinite; }

@@ -1,6 +1,35 @@
 (() => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  // Modo oscuro: sin elección guardada se sigue al sistema; el botón fija la elección y la recuerda en este navegador.
+  const root = document.documentElement;
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const themeBtn = document.getElementById('tema');
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  const current = () => root.dataset.theme || (systemDark.matches ? 'dark' : 'light');
+  const paint = () => {
+    const t = current();
+    root.dataset.themeNow = t;
+    if (themeMeta) themeMeta.content = t === 'dark' ? '#0e1420' : '#f4f5f7';
+    if (themeBtn) {
+      const dark = t === 'dark';
+      themeBtn.setAttribute('aria-pressed', String(dark));
+      const label = dark ? 'Modo claro' : 'Modo oscuro';
+      themeBtn.setAttribute('aria-label', label);
+      themeBtn.title = label;
+    }
+  };
+  paint();
+  systemDark.addEventListener('change', paint);
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      const next = current() === 'dark' ? 'light' : 'dark';
+      const apply = () => { root.dataset.theme = next; paint(); };
+      try { localStorage.setItem('theme', next); } catch (e) { /* sin almacenamiento: dura hasta recargar */ }
+      if (document.startViewTransition && !reduce.matches) document.startViewTransition(apply).ready.catch(() => {}); else apply();
+    });
+  }
+
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.getElementById('nav');
   if (toggle && nav) {
