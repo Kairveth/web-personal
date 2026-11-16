@@ -1,0 +1,18 @@
+# Cabeceras de seguridad para todas las respuestas estáticas.
+# La CSP no admite scripts ni estilos en línea: nada de <script> con código, <style> ni atributos style="" en el HTML.
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()
+  Cross-Origin-Opener-Policy: same-origin
+
+# El diagrama SVG lleva estilos propios y se muestra como imagen: sin CSP para que se pinte igual en todos los navegadores.
+/assets/*.svg
+  ! Content-Security-Policy
+
+# Las fuentes no cambian de nombre: caché larga.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
