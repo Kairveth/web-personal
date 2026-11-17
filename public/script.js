@@ -9,7 +9,7 @@
   const paint = () => {
     const t = current();
     root.dataset.themeNow = t;
-    if (themeMeta) themeMeta.content = t === 'dark' ? '#0e1420' : '#f4f5f7';
+    if (themeMeta) themeMeta.content = t === 'dark' ? '#141618' : '#f4f5f7';
     if (themeBtn) {
       const dark = t === 'dark';
       themeBtn.setAttribute('aria-pressed', String(dark));

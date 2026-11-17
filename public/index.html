@@ -90,7 +90,7 @@
 
 <section id="casos" class="block">
   <div class="wrap">
-    <h2 class="say">Tres problemas que cerré en mis dos proyectos más largos.</h2>
+    <h2 class="say">Mis dos proyectos más largos, problema a problema.</h2>
 
     <div class="proj">
       <div class="proj-head">
@@ -159,15 +159,14 @@
 
     <div class="proj">
       <div class="proj-head">
-        <h3>RGPD en una aseguradora: borrado en cascada y firma por OTP</h3>
+        <h3>RGPD en una aseguradora</h3>
         <p>Dos integraciones distintas. Fue un proyecto largo, con discrepancias con el cliente que tocó resolver por el camino.</p>
-        <p><strong>Borrado en cascada.</strong> El sistema del cliente envía el identificador externo de una persona y Salesforce localiza su cuenta. De ella cuelgan oportunidades, pólizas con sus suplementos, presupuestos, simulaciones, cotizaciones y otros objetos propios. El borrado va de abajo arriba: cada objeto se borra solo si ya no tiene nada relacionado por debajo, y la cuenta cae la última, cuando se ha quedado vacía. La primera petición fue anonimizar por completo.</p>
-        <p><strong>Firma por OTP.</strong> Un LWC permite revisar y corregir el email o el móvil de contacto. Con ese dato, Salesforce pregunta al middleware del cliente qué consentimientos faltan por firmar, y un iframe muestra antes todos los consentimientos RGPD.</p>
       </div>
       <article class="case">
         <p class="case-tag">RGPD · Apex · Sharing</p>
         <div>
-          <h4>Borrado RGPD en cascada</h4>
+          <h4>Borrado en cascada</h4>
+          <p class="case-intro">El sistema del cliente envía el identificador externo de una persona y Salesforce localiza su cuenta. De ella cuelgan oportunidades, pólizas con sus suplementos, presupuestos, simulaciones, cotizaciones y otros objetos propios. Se borra de abajo arriba, y la cuenta cae la última, cuando se ha quedado vacía. La primera petición fue anonimizar por completo.</p>
           <dl class="case-steps">
             <div><dt>Problema</dt><dd>El motor de borrado estaba en producción con 8 defectos.</dd></div>
             <div><dt>Decisión</dt><dd>Reglas explícitas por cada dependencia entre objetos.</dd></div>
@@ -188,6 +187,13 @@
               </ol>
             </figure>
           </details>
+        </div>
+      </article>
+      <article class="case">
+        <p class="case-tag">RGPD · LWC · API REST</p>
+        <div>
+          <h4>Firma de consentimientos por OTP</h4>
+          <p class="case-intro">Un LWC permite revisar y corregir el email o el móvil de contacto. Con ese dato, Salesforce pregunta al middleware del cliente qué consentimientos faltan por firmar, y un iframe muestra antes todos los consentimientos RGPD.</p>
         </div>
       </article>
     </div>

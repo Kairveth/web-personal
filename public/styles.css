@@ -10,7 +10,7 @@
    Los registros son paneles oscuros porque son instrumentos, no decoración. La serif cursiva es la voz de Pedro.
    La mono solo aparece donde hay código o registros. Lo que se mueve explica algo. */
 :root {
-  color-scheme: light;
+  color-scheme: only light;
   --paper: #f4f5f7;
   --paper-tint: #e9ecf1;
   --surface: #fcfcfd;
@@ -41,25 +41,25 @@
 /* Modo oscuro: solo si la persona lo elige con el botón (data-theme lo fija theme.js antes de pintar). El claro es el de siempre. */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --paper: #0e1420;
-  --paper-tint: #131b2a;
-  --surface: #121a28;
-  --ink: #e8ecf2;
-  --ink-soft: #c9d1dd;
-  --graphite: #9aa6b8;
-  --rule: #263044;
-  --accent: #e8ecf2;
-  --on-accent: #0e1420;
+  --paper: #141618;
+  --paper-tint: #1a1d20;
+  --surface: #1c1f23;
+  --ink: #eceef1;
+  --ink-soft: #cfd3d9;
+  --graphite: #a0a7b1;
+  --rule: #2e3238;
+  --accent: #eceef1;
+  --on-accent: #141618;
   --ok-ink: #3fbf8f;
   --retry-ink: #e0a03a;
   --fault-ink: #ef6b5b;
-  --log-bg: #090d14;
-  --log-edge: #263044;
+  --log-bg: #0b0c0e;
+  --log-edge: #2e3238;
 }
 
 /* Bloque invertido: mismas variables, valores cruzados */
 .invert { --paper: #101828; --surface: #101828; --ink: #f4f5f7; --ink-soft: #d3d8e0; --graphite: #a9b2c0; --rule: #2a3550; --accent: #f4f5f7; --on-accent: #101828; background: var(--paper); color: var(--ink); }
-:root[data-theme="dark"] .invert { --paper: #161f30; --surface: #161f30; --rule: #2c3851; }
+:root[data-theme="dark"] .invert { --paper: #1f2328; --surface: #1f2328; --rule: #363b42; }
 
 @view-transition { navigation: auto; }
 
@@ -222,6 +222,7 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 .case:last-child { border-bottom: 1px solid var(--rule); }
 @media (min-width: 860px) { .case { grid-template-columns: 240px 1fr; gap: 48px; } }
 .case-tag { font: 400 .8125rem/1.6 var(--mono); color: var(--graphite); padding-top: 4px; }
+.case-intro { margin-top: 8px; color: var(--graphite); max-width: 68ch; }
 .case h4 { font-size: 1.3125rem; line-height: 1.25; letter-spacing: -0.015em; }
 .case-steps { display: grid; gap: 16px; margin: 20px 0 0; }
 @media (min-width: 860px) { .case-steps { grid-template-columns: repeat(3, 1fr); gap: 32px; } }
