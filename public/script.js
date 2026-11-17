@@ -1,12 +1,11 @@
 (() => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  // Modo oscuro: sin elección guardada se sigue al sistema; el botón fija la elección y la recuerda en este navegador.
+  // Modo oscuro: claro por defecto; el botón cambia el tema y lo recuerda en este navegador.
   const root = document.documentElement;
-  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
   const themeBtn = document.getElementById('tema');
   const themeMeta = document.querySelector('meta[name="theme-color"]');
-  const current = () => root.dataset.theme || (systemDark.matches ? 'dark' : 'light');
+  const current = () => root.dataset.theme || 'light';
   const paint = () => {
     const t = current();
     root.dataset.themeNow = t;
@@ -20,7 +19,6 @@
     }
   };
   paint();
-  systemDark.addEventListener('change', paint);
   if (themeBtn) {
     themeBtn.addEventListener('click', () => {
       const next = current() === 'dark' ? 'light' : 'dark';

@@ -38,26 +38,7 @@
   --ease: cubic-bezier(.2, .7, .2, 1);
   --max: 1120px;
 }
-/* Modo oscuro: sigue al sistema salvo que la persona elija con el botón (data-theme lo fija theme.js antes de pintar) */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-  color-scheme: dark;
-  --paper: #0e1420;
-  --paper-tint: #131b2a;
-  --surface: #121a28;
-  --ink: #e8ecf2;
-  --ink-soft: #c9d1dd;
-  --graphite: #9aa6b8;
-  --rule: #263044;
-  --accent: #e8ecf2;
-  --on-accent: #0e1420;
-  --ok-ink: #3fbf8f;
-  --retry-ink: #e0a03a;
-  --fault-ink: #ef6b5b;
-  --log-bg: #090d14;
-  --log-edge: #263044;
-  }
-}
+/* Modo oscuro: solo si la persona lo elige con el botón (data-theme lo fija theme.js antes de pintar). El claro es el de siempre. */
 :root[data-theme="dark"] {
   color-scheme: dark;
   --paper: #0e1420;
@@ -78,7 +59,6 @@
 
 /* Bloque invertido: mismas variables, valores cruzados */
 .invert { --paper: #101828; --surface: #101828; --ink: #f4f5f7; --ink-soft: #d3d8e0; --graphite: #a9b2c0; --rule: #2a3550; --accent: #f4f5f7; --on-accent: #101828; background: var(--paper); color: var(--ink); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .invert { --paper: #161f30; --surface: #161f30; --rule: #2c3851; } }
 :root[data-theme="dark"] .invert { --paper: #161f30; --surface: #161f30; --rule: #2c3851; }
 
 @view-transition { navigation: auto; }
