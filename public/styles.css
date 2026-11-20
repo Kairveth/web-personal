@@ -407,6 +407,26 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
   .hero-actions { flex-direction: column; align-items: stretch; }
 }
 
+/* Movimiento editorial discreto: solo al entrar y al interactuar; sin JS adicional. */
+@keyframes soft-entrance {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-kicker { animation: soft-entrance .3s var(--ease) both; }
+  .hero-copy h1 { animation: soft-entrance .4s var(--ease) .05s both; }
+  .hero-intro { animation: soft-entrance .42s var(--ease) .1s both; }
+  .hero-actions { animation: soft-entrance .42s var(--ease) .15s both; }
+  .service-card { transition: transform .22s var(--ease), border-color .22s ease, box-shadow .22s ease; }
+  .service-card:focus-within { border-color: var(--ink); }
+  .service-card a span, .contact-chooser a span { display: inline-block; transition: transform .2s var(--ease); }
+  .service-card:focus-within a span, .contact-chooser a:focus-visible span { transform: translateX(3px); }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .service-card:hover { transform: translateY(-3px); border-color: var(--graphite); box-shadow: 0 8px 22px rgba(16, 24, 40, .055); }
+  .service-card:hover a span, .contact-chooser a:hover span { transform: translateX(3px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, ::before, ::after { animation: none !important; transition: none !important; }
