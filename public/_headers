@@ -1,7 +1,7 @@
 # Cabeceras de seguridad para todas las respuestas estáticas.
 # La CSP no admite scripts ni estilos en línea: nada de <script> con código, <style> ni atributos style="" en el HTML.
 /*
-  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
@@ -12,6 +12,9 @@
 # El diagrama SVG lleva estilos propios y se muestra como imagen: sin CSP para que se pinte igual en todos los navegadores.
 /assets/*.svg
   ! Content-Security-Policy
+
+# Web Analytics (inyección automática Cloudflare): permitir su beacon JS y enviar los datos a /cdn-cgi/rum en este mismo origen.
+# Mantener los demás recursos bloqueados; no se habilitan scripts en línea ni conexiones a terceros.
 
 # Las fuentes no cambian de nombre: caché larga.
 /assets/fonts/*
