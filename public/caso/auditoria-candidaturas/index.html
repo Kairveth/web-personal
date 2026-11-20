@@ -28,10 +28,10 @@
 
   <p class="eyebrow">Auditoría de integraciones · Salesforce</p>
   <h1 class="vt-candidaturas">Auditoría técnica de una API de candidaturas en Salesforce</h1>
-  <p class="lead">Revisé el repositorio con ocho reglas de integración y una lectura de riesgos por fallo. Aquí están los hallazgos y el estado de cada uno. Se actualiza al cerrarlos.</p>
+  <p class="lead">Revisé el código de este proyecto con ocho comprobaciones técnicas. Aquí explico qué está bien resuelto, qué problemas encontré y cuáles siguen pendientes.</p>
 
   <h2>Qué revisé</h2>
-  <p>El código del repositorio: siete clases de producción, cinco de test, un trigger, un componente LWC y la colección de Postman. No revisé la org en vivo, así que el estado real de los jobs y la cobertura quedan como pendientes.</p>
+  <p>La revisión incluye siete clases de producción, cinco de test, un trigger, un LWC y la colección de Postman. Se hizo sobre el repositorio, no sobre una org en ejecución; por eso no doy por verificados los jobs ni la cobertura real.</p>
 
   <h2>Reglas</h2>
   <div class="tabla-wrap">
@@ -54,7 +54,7 @@
 
   <article class="hallazgo">
     <h3>1. Fallo final sin registro persistente</h3>
-    <p>Si el destino cae dos veces, el lote se pierde y el único rastro está en el debug log, que caduca. No hay forma de saber qué candidaturas no llegaron.</p>
+    <p>Si los dos intentos fallan, el lote no llega a destino y solo queda el debug log, que acaba caducando. Falta un registro persistente para identificar qué candidaturas no se han enviado.</p>
     <p class="meta">Severidad alta · Estado: abierto</p>
   </article>
 
@@ -66,19 +66,19 @@
 
   <article class="hallazgo">
     <h3>3. Reintento inmediato</h3>
-    <p>El segundo intento se encola al instante. Si el destino sigue caído, falla igual. Hace falta una espera antes del reintento.</p>
+    <p>El segundo intento se lanza inmediatamente. Si el destino sigue caído, volverá a fallar. Conviene añadir un tiempo de espera entre intentos.</p>
     <p class="meta">Severidad media · Estado: abierto</p>
   </article>
 
   <article class="hallazgo">
     <h3>4. La API no comprueba permisos de objeto ni de campo</h3>
-    <p>El endpoint escribe con el usuario de integración sin comprobar create ni update. El controlador del LWC sí lo hace. Hay que alinear los dos.</p>
+    <p>El endpoint escribe con el usuario de integración sin comprobar los permisos de creación o actualización sobre objeto y campos. El controlador del LWC sí los comprueba; hay que aplicar el mismo criterio.</p>
     <p class="meta">Severidad media · Estado: abierto</p>
   </article>
 
   <article class="hallazgo">
     <h3>5. El test del LWC está sin escribir</h3>
-    <p>El archivo de test tiene la plantilla generada por la CLI y no prueba nada. Hasta escribir los casos, no cuenta como prueba.</p>
+    <p>El archivo de test conserva la plantilla que genera la CLI. Todavía faltan pruebas que comprueben el comportamiento del componente.</p>
     <p class="meta">Severidad media · Estado: abierto</p>
   </article>
 
@@ -95,7 +95,7 @@
   </article>
 
   <h2>Qué sigue</h2>
-  <p>Primero, los hallazgos 1 y 2. Después el 5, que es el que más pesa en credibilidad. El resto en el orden que marque el tiempo disponible. Cada cierre se marca aquí con la fecha y el commit.</p>
+  <p>Empezaría por los hallazgos 1 y 2, porque afectan al control de errores. Después completaría las pruebas del LWC (hallazgo 5). Los demás se pueden ordenar por impacto y esfuerzo. Cada corrección quedará vinculada a su fecha y commit.</p>
 
   <footer>
     Auditoría del 29/10/2026 sobre el repositorio de candidaturas. Los datos son de prueba.

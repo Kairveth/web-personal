@@ -28,10 +28,10 @@
 
   <p class="eyebrow">Proyecto personal · Salesforce</p>
   <h1 class="vt-candidaturas">API de candidaturas en Salesforce</h1>
-  <p class="lead">Recibe candidaturas por REST, valida sus cambios de estado y avisa a un sistema externo cuando una candidatura pasa a entrevista.</p>
+  <p class="lead">Este proyecto recibe candidaturas mediante una API REST, controla los cambios de estado y avisa a otro sistema cuando una candidatura pasa a entrevista.</p>
 
   <h2>Problema</h2>
-  <p>Las candidaturas llegan desde fuera por API. Cuando una pasa a Entrevista, otro sistema tiene que enterarse. Hay que evitar duplicados y cambios de estado que no tengan sentido.</p>
+  <p>Las candidaturas llegan desde un sistema externo. Si una pasa a Entrevista, hay que avisar a otra aplicación. El reto está en evitar duplicados y bloquear cambios de estado que no estén permitidos.</p>
 
   <h2>Arquitectura</h2>
   <figure>
@@ -41,11 +41,11 @@
 
   <h2>Decisiones y alternativas descartadas</h2>
   <div class="decisiones">
-    <p><strong>API REST propia, no la API estándar.</strong> Descartada: API estándar. Motivo: hace falta idempotencia por idExterno y códigos 400 y 409 concretos. Con la API estándar, esa lógica quedaría en el sistema que llama.</p>
-    <p><strong>Reglas de transición en el trigger, no en el endpoint.</strong> Descartada: validar en el endpoint. Motivo: la regla también se aplica a la edición desde la ficha y a cualquier otro origen.</p>
-    <p><strong>Validar en before update, notificar en after update.</strong> Descartada: notificar en before. Motivo: after tiene el registro ya guardado. El callout no puede ir desde el trigger, así que va en un Queueable.</p>
-    <p><strong>Un callout por lote.</strong> Descartada: un callout por registro. Motivo: con 200 registros, una sola petición. Coste: si falla, el lote entero se reintenta junto.</p>
-    <p><strong>Finalizer para el reintento, no Schedulable.</strong> Descartada: Schedulable. Motivo: el reintento depende del resultado del job, no de un calendario. Coste: el reintento es inmediato (ver límites).</p>
+    <p><strong>Una API REST propia.</strong> Necesitaba controlar la idempotencia por idExterno y devolver respuestas 400 y 409 concretas. Con la API estándar, esa lógica tendría que resolverla el sistema que hace la llamada.</p>
+    <p><strong>Las transiciones se validan en el trigger.</strong> Así, las reglas también se aplican a los cambios desde la ficha y no solo a los que llegan por la API.</p>
+    <p><strong>Validación en before update y aviso en after update.</strong> Primero compruebo si la transición es válida. Después, con el registro guardado, encolo un Queueable para hacer la llamada externa fuera del trigger.</p>
+    <p><strong>Una petición por lote.</strong> En lugar de enviar una llamada por registro, agrupo hasta 200 en una sola. Reduce llamadas, aunque si falla la petición hay que reintentar el lote completo.</p>
+    <p><strong>Finalizer para el reintento.</strong> El segundo intento depende del resultado del Queueable, no de una tarea programada. La limitación actual es que se ejecuta inmediatamente (ver límites).</p>
   </div>
 
   <ol>
@@ -103,13 +103,13 @@
 
   <h2>Límites conocidos</h2>
   <ul>
-    <li><strong>Reintento inmediato.</strong> <span>Si el destino sigue caído, el segundo intento falla igual.</span></li>
+    <li><strong>Reintento inmediato.</strong> <span>Si el destino sigue sin responder, el segundo intento también puede fallar.</span></li>
     <li><strong>Fallo final sin registro.</strong> <span>Solo queda en el debug log, que caduca. No hay forma de saber qué candidaturas no llegaron.</span></li>
     <li><strong>Sin clave de idempotencia en el callout.</strong> <span>Si el destino procesa el lote y la respuesta se pierde, puede duplicar allí.</span></li>
-    <li><strong>Timeout por defecto.</strong> <span>El callout no define timeout explícito.</span></li>
+    <li><strong>Timeout por defecto.</strong> <span>La llamada no tiene un tiempo de espera definido explícitamente.</span></li>
     <li><strong>Anonimización parcial.</strong> <span>El batch cambia el nombre y deja IdExterno__c. Pendiente de confirmar si identifica a una persona.</span></li>
   </ul>
-  <p>Cada límite está en la <a href="auditoria-candidaturas/">auditoría del repositorio</a> con su estado.</p>
+  <p>Puedes consultar cada punto y su estado en la <a href="auditoria-candidaturas/">auditoría del repositorio</a>.</p>
 
   <h2>Documentación</h2>
   <ul>
