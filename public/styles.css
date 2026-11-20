@@ -339,6 +339,94 @@ h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; }
 .notfound .lead { margin-top: 0; }
 .notfound .actions { margin-top: 8px; }
 
+/* Refuerzo comercial: legibilidad, evidencia y servicios sin ocultar.
+   Conserva la tipografía, la paleta y la simulación de integración originales. */
+.hero { padding-top: 72px; padding-bottom: 32px; }
+.hero-kicker { font: 500 .8125rem/1.5 var(--mono); color: var(--graphite); letter-spacing: .01em; margin-bottom: 18px; }
+.hero-copy h1 { font-size: clamp(2.3rem, 4.5vw, 3.9rem); line-height: 1.07; max-width: 14ch; }
+.hero-intro { margin-top: 24px; }
+.hero-intro .lead { max-width: 55ch; font-size: 1.0625rem; line-height: 1.6; }
+.hero-actions { margin-top: 26px; }
+.hero-credentials { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; list-style: none; margin: 24px 0 0; padding: 18px 0 0; border-top: 1px solid var(--rule); }
+.hero-credentials li { display: grid; gap: 3px; min-width: 0; }
+.hero-credentials strong { font-size: 1rem; line-height: 1.4; }
+.hero-credentials span { font-size: .8125rem; line-height: 1.5; color: var(--graphite); }
+.hero-meta { margin-top: 28px; }
+.section-intro { margin: -22px 0 32px; max-width: 68ch; color: var(--graphite); }
+.service-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0 0 48px; }
+.service-card { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding: 28px 24px; border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); }
+.service-card-label { font: 500 .75rem/1.5 var(--mono); color: var(--graphite); }
+.service-card h3 { font-size: 1.35rem; line-height: 1.2; letter-spacing: -.02em; }
+.service-card p:not(.service-card-label) { color: var(--graphite); line-height: 1.6; }
+.service-card a { margin-top: auto; padding-top: 4px; color: var(--ink); font-weight: 700; text-underline-offset: 5px; }
+.service-card a:hover, .section-link:hover { text-decoration-thickness: 2px; }
+.services-more-title { margin-bottom: 22px; font-size: 1.1875rem; }
+.section-link { color: var(--ink); font-weight: 600; text-underline-offset: 5px; }
+.case-heading { align-items: end; }
+.contact-intro { color: var(--graphite); max-width: 57ch; margin-top: -18px; }
+.contact-chooser { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 760px; margin: 26px 0 28px; }
+.contact-chooser a { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 9px; color: var(--ink); text-decoration: none; font-weight: 600; font-size: .9375rem; background: var(--surface); transition: border-color .2s ease; }
+.contact-chooser a:hover, .contact-chooser a:focus-visible { border-color: var(--ink); }
+.contact-chooser span { color: var(--graphite); flex: none; }
+.service-page .service-related { display: grid; gap: 12px; padding: 24px 0; border-top: 1px solid var(--rule); margin-top: 36px; }
+.service-page .service-related h2 { margin: 0 0 8px; font-size: 1.25rem; }
+.service-page .service-related nav { display: flex; gap: 12px 24px; flex-wrap: wrap; }
+.service-page .service-related a { font-size: .9375rem; color: var(--ink); font-weight: 600; text-underline-offset: 5px; }
+@media (max-width: 560px) { .contact-chooser { grid-template-columns: 1fr; } }
+.service-page h1 { max-width: 21ch; font-size: clamp(2.2rem, 4.6vw, 3.5rem); line-height: 1.12; }
+.service-page > .lead { max-width: 70ch; }
+.service-page .service-page-actions { margin-top: 26px; margin-bottom: 28px; }
+.service-page .related-case { margin-top: 36px; color: var(--graphite); font-size: .9375rem; }
+.service-page .related-case a { color: var(--ink); font-weight: 600; text-underline-offset: 4px; }
+.service-page .service-page-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 30px 0 0; padding: 0; border: none; }
+.service-page .service-page-facts li { padding: 16px; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; font-size: .9375rem; font-weight: 500; line-height: 1.5; color: var(--ink); }
+.service-page .service-page-cta { border-top: 1px solid var(--rule); padding-top: 32px; }
+.service-page .service-page-cta h2 { margin-top: 0; }
+@media (min-width: 960px) {
+  .hero-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: 48px; }
+}
+@media (max-width: 800px) {
+  .service-cards { grid-template-columns: 1fr; }
+  .service-card { padding: 24px; }
+  .service-page .service-page-facts { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .hero { padding-top: 50px; }
+  .hero-copy h1 { max-width: 16ch; }
+  .hero-grid { gap: 28px; }
+  .hero-credentials { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hero .log { font-size: .75rem; }
+  .block { padding: 64px 0; }
+  .say { margin-bottom: 30px; }
+  .section-intro { margin-top: -12px; }
+  .service-cards { margin-bottom: 34px; }
+  .hero-actions .btn { justify-content: center; }
+}
+@media (max-width: 390px) {
+  .hero-credentials { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+}
+
+/* Movimiento editorial discreto: solo al entrar y al interactuar; sin JS adicional. */
+@keyframes soft-entrance {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-kicker { animation: soft-entrance .3s var(--ease) both; }
+  .hero-copy h1 { animation: soft-entrance .4s var(--ease) .05s both; }
+  .hero-intro { animation: soft-entrance .42s var(--ease) .1s both; }
+  .hero-actions { animation: soft-entrance .42s var(--ease) .15s both; }
+  .service-card { transition: transform .22s var(--ease), border-color .22s ease, box-shadow .22s ease; }
+  .service-card:focus-within { border-color: var(--ink); }
+  .service-card a span, .contact-chooser a span { display: inline-block; transition: transform .2s var(--ease); }
+  .service-card:focus-within a span, .contact-chooser a:focus-visible span { transform: translateX(3px); }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .service-card:hover { transform: translateY(-3px); border-color: var(--graphite); box-shadow: 0 8px 22px rgba(16, 24, 40, .055); }
+  .service-card:hover a span, .contact-chooser a:hover span { transform: translateX(3px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, ::before, ::after { animation: none !important; transition: none !important; }
