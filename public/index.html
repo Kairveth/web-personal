@@ -38,13 +38,12 @@
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     </button>
     <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">Menú</button>
-    <nav id="nav" class="nav">
-      <a href="#casos">Trabajo</a>
+    <nav id="nav" class="nav" aria-label="Navegación principal">
       <a href="#servicios">Servicios</a>
-      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#casos">Casos reales</a>
       <a href="#portfolio">Proyectos</a>
-      <a href="#contacto">Contacto</a>
-      <a class="nav-cta" href="https://cal.com/pedro-romero-alvarez/30min" rel="noopener noreferrer">Reservar llamada</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a class="nav-cta" href="#contacto">Contactar</a>
     </nav>
   </div>
 </header>
@@ -54,17 +53,22 @@
 <section id="inicio" class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
+      <p class="hero-kicker">Salesforce · Desarrollo senior · Integraciones</p>
       <h1>Salesforce Developer freelance. <span class="voz">De la integración a producción.</span></h1>
       <div class="hero-intro">
         <img class="hero-photo" src="assets/foto.jpg" alt="Pedro Romero Álvarez" width="720" height="900" />
-        <p class="lead">Soy Pedro, Salesforce Developer y consultor técnico especializado en integraciones. Refuerzo equipos de empresas y consultoras con desarrollo Apex, LWC, Flow, auditorías y resolución de incidencias complejas. Analizo el problema, implemento y entrego código probado y documentado.</p>
+        <p class="lead">Soy Pedro, Salesforce Developer y consultor técnico especializado en integraciones. Ayudo a empresas y consultoras con Apex, LWC, Flow, auditorías y resolución de incidencias. Del análisis al despliegue, con código probado y documentado.</p>
       </div>
-      <div class="actions">
-        <a class="btn btn-primary" href="https://cal.com/pedro-romero-alvarez/30min" rel="noopener noreferrer">Hablar de tu proyecto</a>
-        <a class="btn btn-quiet" href="#servicios">Ver servicios Salesforce</a>
+      <div class="actions hero-actions">
+        <a class="btn btn-primary" href="mailto:pedro@pedroralvarez.com?subject=Proyecto%20Salesforce">Contactar para un proyecto</a>
+        <a class="btn btn-quiet" href="assets/cv-pedro-romero-alvarez.pdf" download>Descargar CV</a>
       </div>
-      <p class="hero-links">¿Eres recruiter o Tech Lead? <a href="assets/cv-pedro-romero-alvarez.pdf" download>Descarga mi CV</a>. Si buscas colaboración freelance, <a href="#contacto">escríbeme</a>.</p>
+      <p class="hero-links">¿Quieres conocer cómo trabajo? <a href="#casos">Ver casos reales</a> · <a href="#servicios">Explorar servicios</a></p>
       <p class="disponibilidad">Freelance prioritario · Híbrido en Tarragona y el Tarragonès · Remoto en toda España</p>
+      <ul class="hero-credentials" aria-label="Experiencia y credenciales">
+        <li><strong>Desde 2019</strong><span>Experiencia Salesforce</span></li>
+        <li><strong>8 certificaciones</strong><span>Platform Developer II y Integration Architect</span></li>
+      </ul>
     </div>
     <figure class="log" aria-label="Registro simulado de una integración">
       <figcaption class="log-head"><span>integracion.log</span><span>simulación</span></figcaption>
@@ -85,12 +89,83 @@
       </div>
     </figure>
   </div>
-  <p class="wrap hero-meta">Altafulla, Tarragona · Desde 2019 con Salesforce · 8 certificaciones</p>
+  <p class="wrap hero-meta">Altafulla (Tarragona) · Reuniones en español · Documentación y comunicación escrita en inglés</p>
+</section>
+
+<section id="servicios" class="block block-tint">
+  <div class="wrap">
+    <h2 class="say">¿Qué necesitas resolver en Salesforce?</h2>
+    <p class="section-intro">Puedes contratarme para reforzar tu equipo o resolver una necesidad concreta. Estos son mis tres servicios principales.</p>
+    <div class="service-cards">
+      <article class="service-card">
+        <p class="service-card-label">01 · Desarrollo</p>
+        <h3>Senior Salesforce Developer</h3>
+        <p>Apex, LWC, Flow, Batch y evolutivos. Desarrollo y refactorización con pruebas, seguridad y documentación para tu equipo.</p>
+        <a href="mailto:pedro@pedroralvarez.com?subject=Desarrollo%20Salesforce">Consultar desarrollo <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="service-card">
+        <p class="service-card-label">02 · Integraciones</p>
+        <h3>Integraciones Salesforce</h3>
+        <p>Conexión con otras aplicaciones y plataformas, según viabilidad. Arquitectura, autenticación, gestión de errores y trazabilidad.</p>
+        <a href="integraciones-salesforce/">Ver integraciones <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="service-card">
+        <p class="service-card-label">03 · Auditorías</p>
+        <h3>Auditorías técnicas</h3>
+        <p>Revisión de código, Flows, integraciones y permisos. Hallazgos documentados y plan de mejoras priorizado.</p>
+        <a href="auditoria-salesforce/">Ver auditorías <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+    <h3 class="services-more-title">También puedo ayudarte con</h3>
+    <div class="svc-list">
+            <details class="svc" name="servicios">
+        <summary><span>Flow y automatización declarativa</span><span class="svc-sub">antes de escribir código</span></summary>
+        <div class="svc-body">
+          <p>Antes de programar miro si un Flow, una regla de validación o un Permission Set lo resuelven. Si basta con eso, no escribo Apex. También reviso los Flows que ya tienes cuando se pisan entre ellos o con triggers.</p>
+          <p>Recibes la automatización probada y una nota de qué dispara cada Flow y en qué orden.</p>
+          <p><strong>Qué no hago.</strong> No meto en un Flow una lógica que se va a volver imposible de seguir. Si toca Apex, te explico por qué.</p>
+        </div>
+      </details>
+            <details class="svc" name="servicios">
+        <summary><span>Refactor y limpieza de código</span><span class="svc-sub">sin cambiar lo que ya funciona</span></summary>
+        <div class="svc-body">
+          <p>Ordeno código heredado: triggers con lógica dentro, consultas en bucles, IDs y valores escritos a mano. Los parámetros que cambian por entorno o que el administrador debería poder tocar pasan a Custom Metadata.</p>
+          <p>Recibes el mismo comportamiento, con pruebas que lo comprueban antes y después del cambio, y la lista de lo que he corregido.</p>
+          <p><strong>Qué no hago.</strong> No reescribo todo desde cero si se puede mejorar por partes.</p>
+        </div>
+      </details>
+            <details class="svc" name="servicios">
+        <summary><span>Soporte y mantenimiento Salesforce</span><span class="svc-sub">cuando ya está en producción</span></summary>
+        <div class="svc-body">
+          <p>Corrijo incidencias buscando la causa y no el síntoma, y hago evolutivos sobre lo que ya funciona. También ofrezco bolsas de horas para mantenimiento y apoyo técnico, con tareas y disponibilidad previamente acordadas.</p>
+          <p>Por cada incidencia recibes qué la causaba, qué cambié y cómo comprobarlo.</p>
+          <p><strong>Qué no hago.</strong> No toco producción sin validar el despliegue y sin tu confirmación.</p>
+        </div>
+      </details>
+      <details class="svc" name="servicios">
+        <summary><span>Calidad de código, pruebas y apoyo en despliegues</span><span class="svc-sub">revisión técnica y colaboración con tu equipo</span></summary>
+        <div class="svc-body">
+          <p>Reviso Apex, LWC y automatizaciones; refactorizo código difícil de mantener y refuerzo pruebas de escenarios reales, permisos y gestión de errores. Tengo experiencia trabajando con Git, Bitbucket y despliegues Salesforce entre entornos.</p>
+          <p>Puedo colaborar en la revisión de pull requests y acompañar despliegues dentro de un proceso de equipo. Si el trabajo exige construir o administrar pipelines CI/CD complejos, primero evaluamos el alcance y la necesidad de apoyo especializado.</p>
+        </div>
+      </details>
+      <details class="svc" name="servicios">
+        <summary><span>Service Cloud e integraciones de canales</span><span class="svc-sub">WhatsApp, Omni-Channel y APIs</span></summary>
+        <div class="svc-body">
+          <p>Trabajo con integraciones API REST, autenticación OAuth y configuraciones de Service Cloud, incluyendo Messaging for In-App and Web, WhatsApp y enrutamiento con Omni-Channel.</p>
+          <p>Reviso requisitos, permisos y pruebas antes de un despliegue. La viabilidad final depende de licencias y servicios contratados por el cliente.</p>
+        </div>
+      </details>
+    </div>
+  </div>
 </section>
 
 <section id="casos" class="block">
   <div class="wrap">
-    <h2 class="say">Mis dos proyectos más largos, problema a problema.</h2>
+    <div class="block-head case-heading">
+      <h2 class="say">Experiencia real, decisiones que puedes evaluar.</h2>
+      <a class="section-link" href="#portfolio">Ver proyectos técnicos <span aria-hidden="true">→</span></a>
+    </div>
 
     <div class="proj">
       <div class="proj-head">
@@ -196,77 +271,6 @@
           <p class="case-intro">Un LWC permite revisar y corregir el email o el móvil de contacto. Con ese dato, Salesforce pregunta al middleware del cliente qué consentimientos faltan por firmar, y un iframe muestra antes todos los consentimientos RGPD.</p>
         </div>
       </article>
-    </div>
-  </div>
-</section>
-
-<section id="servicios" class="block block-tint">
-  <div class="wrap">
-    <h2 class="say">Servicios Salesforce para empresas y consultoras.</h2>
-    <div class="svc-list">
-      <details class="svc" name="servicios" open>
-        <summary><span>Desarrollo Salesforce senior: Apex y LWC</span><span class="svc-sub">lo que la configuración no cubre</span></summary>
-        <div class="svc-body">
-          <p>Lógica en Apex y Lightning Web Components (LWC) para lo que la configuración estándar no resuelve. Triggers con un handler por objeto, sin consultas dentro de bucles y preparados para cargas de cientos de registros.</p>
-          <p>Recibes código con pruebas, el despliegue validado antes de tocar producción y notas con las decisiones que tomé.</p>
-          <p><strong>Qué no hago.</strong> No diseño la identidad visual de la marca. Trabajo con los componentes y patrones que ya use el cliente.</p>
-        </div>
-      </details>
-      <details class="svc" name="servicios">
-        <summary><span>Flow y automatización declarativa</span><span class="svc-sub">antes de escribir código</span></summary>
-        <div class="svc-body">
-          <p>Antes de programar miro si un Flow, una regla de validación o un Permission Set lo resuelven. Si basta con eso, no escribo Apex. También reviso los Flows que ya tienes cuando se pisan entre ellos o con triggers.</p>
-          <p>Recibes la automatización probada y una nota de qué dispara cada Flow y en qué orden.</p>
-          <p><strong>Qué no hago.</strong> No meto en un Flow una lógica que se va a volver imposible de seguir. Si toca Apex, te explico por qué.</p>
-        </div>
-      </details>
-      <details class="svc" name="servicios">
-        <summary><span>Integraciones Salesforce con cualquier sistema compatible</span><span class="svc-sub">conexiones nuevas, mejoras y resolución de fallos</span></summary>
-        <div class="svc-body">
-          <p>Integro Salesforce con otras aplicaciones y plataformas cuando existe una vía técnica viable. Evalúo el sistema, sus interfaces, la seguridad y el intercambio de datos antes de proponer una solución. Tengo experiencia directa con APIs REST, OAuth, webhooks, Named Credentials y canales de Service Cloud.</p>
-          <p>La solución puede requerir otros mecanismos, como SOAP, eventos, middleware o intercambio de archivos: estudio cada caso y los requisitos técnicos antes de comprometer alcance, plazo y arquitectura.</p>
-          <p>Te entrego un diseño acordado, código con pruebas y documentación, y una puesta en producción coordinada contigo. <a href="integraciones-salesforce/">Conoce mi servicio de integraciones Salesforce</a>.</p>
-          <p><strong>Qué no hago.</strong> No garantizo integrar sistemas sin interfaces disponibles ni sustituyo una plataforma de integración empresarial cuando el proyecto la requiere.</p>
-        </div>
-      </details>
-      <details class="svc" name="servicios">
-        <summary><span>Refactor y limpieza de código</span><span class="svc-sub">sin cambiar lo que ya funciona</span></summary>
-        <div class="svc-body">
-          <p>Ordeno código heredado: triggers con lógica dentro, consultas en bucles, IDs y valores escritos a mano. Los parámetros que cambian por entorno o que el administrador debería poder tocar pasan a Custom Metadata.</p>
-          <p>Recibes el mismo comportamiento, con pruebas que lo comprueban antes y después del cambio, y la lista de lo que he corregido.</p>
-          <p><strong>Qué no hago.</strong> No reescribo todo desde cero si se puede mejorar por partes.</p>
-        </div>
-      </details>
-      <details class="svc" name="servicios">
-        <summary><span>Auditoría técnica Salesforce y diseño de soluciones</span><span class="svc-sub">antes de construir o cuando algo no cuadra</span></summary>
-        <div class="svc-body">
-          <p>Para un proyecto nuevo propongo el diseño: qué va en configuración y qué en código, qué patrón seguir y qué riesgos veo. Si la org ya existe, reviso integraciones, código Apex, permisos y uso compartido en modo solo lectura.</p>
-          <p>Entrego un informe con hallazgos, severidad, evidencia y un plan priorizado. <a href="auditoria-salesforce/">Consulta las modalidades de auditoría técnica</a> o mira una <a href="caso/auditoria-candidaturas/">auditoría de un proyecto propio</a>.</p>
-          <p><strong>Qué no hago.</strong> No accedo a una org sin permiso por escrito ni publico datos de clientes.</p>
-        </div>
-      </details>
-      <details class="svc" name="servicios">
-        <summary><span>Soporte y mantenimiento Salesforce</span><span class="svc-sub">cuando ya está en producción</span></summary>
-        <div class="svc-body">
-          <p>Corrijo incidencias buscando la causa y no el síntoma, y hago evolutivos sobre lo que ya funciona. También ofrezco bolsas de horas para mantenimiento y apoyo técnico, con tareas y disponibilidad previamente acordadas.</p>
-          <p>Por cada incidencia recibes qué la causaba, qué cambié y cómo comprobarlo.</p>
-          <p><strong>Qué no hago.</strong> No toco producción sin validar el despliegue y sin tu confirmación.</p>
-        </div>
-      </details>
-      <details class="svc" name="servicios">
-        <summary><span>Calidad de código, pruebas y apoyo en despliegues</span><span class="svc-sub">revisión técnica y colaboración con tu equipo</span></summary>
-        <div class="svc-body">
-          <p>Reviso Apex, LWC y automatizaciones; refactorizo código difícil de mantener y refuerzo pruebas de escenarios reales, permisos y gestión de errores. Tengo experiencia trabajando con Git, Bitbucket y despliegues Salesforce entre entornos.</p>
-          <p>Puedo colaborar en la revisión de pull requests y acompañar despliegues dentro de un proceso de equipo. Si el trabajo exige construir o administrar pipelines CI/CD complejos, primero evaluamos el alcance y la necesidad de apoyo especializado.</p>
-        </div>
-      </details>
-      <details class="svc" name="servicios">
-        <summary><span>Service Cloud e integraciones de canales</span><span class="svc-sub">WhatsApp, Omni-Channel y APIs</span></summary>
-        <div class="svc-body">
-          <p>Trabajo con integraciones API REST, autenticación OAuth y configuraciones de Service Cloud, incluyendo Messaging for In-App and Web, WhatsApp y enrutamiento con Omni-Channel.</p>
-          <p>Reviso requisitos, permisos y pruebas antes de un despliegue. La viabilidad final depende de licencias y servicios contratados por el cliente.</p>
-        </div>
-      </details>
     </div>
   </div>
 </section>
@@ -410,6 +414,7 @@
 <section id="contacto" class="block invert contact">
   <div class="wrap">
     <h2 class="say">¿Necesitas un Salesforce Developer? Hablemos.</h2>
+    <p class="contact-intro">Cuéntame qué quieres construir o qué falla. También puedo incorporarme temporalmente a un equipo técnico.</p>
     <a class="contact-mail" href="mailto:pedro@pedroralvarez.com">pedro@pedroralvarez.com</a>
     <div class="actions">
       <a class="btn btn-primary" href="https://cal.com/pedro-romero-alvarez/30min" rel="noopener noreferrer">Reservar llamada</a>
@@ -421,7 +426,7 @@
       <li>Te digo si puedo ayudarte, y qué no haría.</li>
       <li>Si te encaja, te mando una propuesta con alcance, plazo y precio.</li>
     </ol>
-    <p class="contact-note">Colaboración freelance preferente · Híbrido en Tarragona y el Tarragonès · Remoto en toda España · Reuniones en español · Inglés para lectura de documentación y comunicación escrita, sin reuniones en inglés por ahora · Presupuesto según alcance.</p>
+    <p class="contact-note">Freelance prioritario · Híbrido en Tarragona y el Tarragonès · Remoto en toda España · Reuniones en español y comunicación técnica escrita en inglés · Presupuesto según alcance.</p>
   </div>
 </section>
 
